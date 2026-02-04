@@ -338,12 +338,37 @@ export default function Hero() {
             className="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2 px-4 sm:px-0 gap-8 justify-center lg:justify-start mt-2 lg:mt-4"
           >
             {/* Eyebrow badge */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-white/80 shadow-sm px-4 py-2 backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-[#037ef3] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#234934]/80">
-                Global Volunteer · Sri Lanka
-              </span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-3 px-5 py-2.5 relative group cursor-default"
+            >
+              {/* Animated background with glassmorphism */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/85 to-white/90 backdrop-blur-xl rounded-full border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] group-hover:shadow-[0_6px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.95)] transition-all duration-300" />
+
+              {/* Animated glow border */}
+              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-[#037ef3]/30 via-[#00d4ff]/30 to-[#037ef3]/30 blur-sm -z-10" />
+
+              {/* Content */}
+              <div className="relative z-10 flex items-center gap-3">
+                {/* Animated pulse dot with glow */}
+                <div className="relative">
+                  <span className="absolute inset-0 h-2.5 w-2.5 rounded-full bg-[#037ef3] animate-ping opacity-75" />
+                  <span className="relative block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#037ef3] shadow-[0_0_8px_rgba(3,126,243,0.6)] group-hover:shadow-[0_0_12px_rgba(0,212,255,0.8)] transition-all duration-300" />
+                </div>
+
+                {/* Text with gradient */}
+                <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-[#234934] via-[#037ef3] to-[#234934] bg-clip-text text-transparent group-hover:from-[#037ef3] group-hover:via-[#00d4ff] group-hover:to-[#037ef3] transition-all duration-500">
+                  Global Volunteer{" "}
+                  <span className="mx-1.5 text-[#234934]/40 group-hover:text-[#037ef3]/60 transition-colors duration-300">
+                    ·
+                  </span>{" "}
+                  Sri Lanka
+                </span>
+              </div>
+            </motion.div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-tight max-w-xl gradient-text">
@@ -365,22 +390,35 @@ export default function Hero() {
             </p>
 
             {/* Primary actions */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-5">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 sm:gap-6">
               <Link href="/projects">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="btn-primary flex items-center gap-2"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-primary flex items-center gap-3 group relative"
                 >
-                  Explore projects
-                  <ArrowUpRight size={20} />
+                  <span className="relative z-10">Explore projects</span>
+                  <ArrowUpRight
+                    size={18}
+                    className="relative z-10 transition-all duration-400 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]"
+                  />
                 </motion.button>
               </Link>
 
               <Link href="#experiences">
-                <button className="btn-secondary flex items-center gap-2 bg-white/70 border-[#234934]/20 text-[#234934] hover:bg-[#234934] hover:text-white">
-                  View stories
-                </button>
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-secondary flex items-center gap-3 group relative"
+                >
+                  <span className="relative z-10 text-[#00cc6a] group-hover:text-white transition-colors duration-400">
+                    View stories
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    className="relative z-10 text-[#00cc6a] group-hover:text-white transition-all duration-400 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                  />
+                </motion.button>
               </Link>
             </div>
 
