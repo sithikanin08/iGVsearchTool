@@ -7,7 +7,7 @@ import * as THREE from "three";
 
 function FloatingParticles() {
   const points = useRef<THREE.Points>(null);
-  const particleCount = 1500;
+  const particleCount = 3000;
 
   // Create particle positions with a flowing, wind-like distribution
   const positions = useMemo(() => {
@@ -69,10 +69,10 @@ function FloatingParticles() {
       <PointMaterial
         transparent
         color="#234934"
-        size={0.15}
+        size={0.25}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.6}
+        opacity={0.75}
         blending={THREE.AdditiveBlending}
       />
     </Points>
@@ -81,7 +81,7 @@ function FloatingParticles() {
 
 function DiamondParticles() {
   const points = useRef<THREE.Points>(null);
-  const particleCount = 800;
+  const particleCount = 2000;
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
@@ -133,10 +133,10 @@ function DiamondParticles() {
       <PointMaterial
         transparent
         color="#037ef3"
-        size={0.2}
+        size={0.3}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.5}
+        opacity={0.7}
         blending={THREE.AdditiveBlending}
       />
     </Points>
@@ -145,7 +145,7 @@ function DiamondParticles() {
 
 function GlowingParticles() {
   const points = useRef<THREE.Points>(null);
-  const particleCount = 600;
+  const particleCount = 1500;
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
@@ -190,10 +190,10 @@ function GlowingParticles() {
       <PointMaterial
         transparent
         color="#e8f4f8"
-        size={0.12}
+        size={0.2}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.4}
+        opacity={0.6}
         blending={THREE.AdditiveBlending}
       />
     </Points>

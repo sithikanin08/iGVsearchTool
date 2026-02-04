@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeroParticleBackground from "./HeroParticleBackground";
 
 // Sri Lanka images for the 3D floating blocks - 8 cards
@@ -132,8 +132,47 @@ const Card3D = ({
 };
 
 export default function Hero() {
+  const [navbarHeight, setNavbarHeight] = useState(120); // Default fallback height
+
+  useEffect(() => {
+    const calculateNavbarHeight = () => {
+      // Find the navbar element
+      const navbar = document.querySelector('nav[class*="fixed"]');
+      if (navbar) {
+        const rect = navbar.getBoundingClientRect();
+        // Calculate total space: top offset + navbar height + spacing
+        const topOffset = parseFloat(getComputedStyle(navbar).top) || 0;
+        const height = rect.height;
+        const totalSpace = topOffset + height + 20; // 20px spacing
+        setNavbarHeight(totalSpace);
+      } else {
+        // Fallback: calculate based on responsive classes
+        // top-5 (20px) or sm:top-6 (24px) + navbar height (~70-80px) + spacing
+        const isMobile = window.innerWidth < 640;
+        setNavbarHeight(isMobile ? 120 : 130);
+      }
+    };
+
+    // Calculate on mount
+    calculateNavbarHeight();
+
+    // Recalculate on resize
+    window.addEventListener("resize", calculateNavbarHeight);
+
+    // Also recalculate after a short delay to ensure navbar is rendered
+    const timeout = setTimeout(calculateNavbarHeight, 100);
+
+    return () => {
+      window.removeEventListener("resize", calculateNavbarHeight);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden pt-36 sm:pt-40">
+    <section
+      className="relative min-h-screen hero-gradient overflow-hidden"
+      style={{ paddingTop: `${navbarHeight}px` }}
+    >
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
 
@@ -141,7 +180,7 @@ export default function Hero() {
       <HeroParticleBackground />
 
       <div className="container-custom relative z-10 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-12 pb-12 lg:pt-16 lg:pb-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-8 pb-12 lg:pt-10 lg:pb-0">
           {/* Left side - 3D Floating Image Cards */}
           <div
             className="relative h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1 mt-6 lg:mt-6 translate-y-4 lg:translate-y-6"
