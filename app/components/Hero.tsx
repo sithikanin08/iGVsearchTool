@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import HeroParticleBackground from "./HeroParticleBackground";
 
 // Sri Lanka images for the 3D floating blocks - 8 cards
 const heroImages = [
@@ -136,21 +137,8 @@ export default function Hero() {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
 
-      {/* Decorative sparkles */}
-      <motion.div
-        className="absolute top-20 right-20 text-[#234934]/20 hidden lg:block"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      >
-        <Sparkles size={40} />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-40 right-32 text-[#037ef3]/20 hidden lg:block"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      >
-        <Sparkles size={30} />
-      </motion.div>
+      {/* Modern particle animation background */}
+      <HeroParticleBackground />
 
       <div className="container-custom relative z-10 min-h-screen flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-12 pb-12 lg:pt-16 lg:pb-0">
@@ -376,16 +364,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* Decorative bottom sparkle */}
-      <motion.div
-        className="absolute bottom-20 right-1/4 text-[#234934]/10"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-      >
-        <Sparkles size={60} />
-      </motion.div>
     </section>
   );
 }
