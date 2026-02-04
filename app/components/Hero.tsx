@@ -55,7 +55,8 @@ const glassCardStyle = {
   backdropFilter: "blur(8px)",
   WebkitBackdropFilter: "blur(8px)",
   border: "1px solid rgba(255, 255, 255, 0.25)",
-  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.1)",
+  boxShadow:
+    "0 8px 32px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.1)",
 };
 
 // Card component with hover effect
@@ -69,7 +70,15 @@ interface CardProps {
   cardStyle?: React.CSSProperties;
 }
 
-const Card3D = ({ image, style, floatDelay, floatDuration, floatAmplitude, className = "rounded-2xl", cardStyle }: CardProps) => {
+const Card3D = ({
+  image,
+  style,
+  floatDelay,
+  floatDuration,
+  floatAmplitude,
+  className = "rounded-2xl",
+  cardStyle,
+}: CardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -95,16 +104,25 @@ const Card3D = ({ image, style, floatDelay, floatDuration, floatAmplitude, class
         style={{ transformStyle: "preserve-3d" }}
         className="w-full h-full"
       >
-        <motion.div 
+        <motion.div
           animate={{ y: [0, -floatAmplitude, 0] }}
-          transition={{ duration: floatDuration, repeat: Infinity, ease: "easeInOut", delay: floatDelay }}
+          transition={{
+            duration: floatDuration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: floatDelay,
+          }}
           className="w-full h-full"
         >
-          <div 
+          <div
             className={`w-full h-full ${className} overflow-hidden`}
             style={cardStyle || glassCardStyle}
           >
-            <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-cover"
+            />
           </div>
         </motion.div>
       </motion.div>
@@ -114,7 +132,7 @@ const Card3D = ({ image, style, floatDelay, floatDuration, floatAmplitude, class
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden">
+    <section className="relative min-h-screen hero-gradient overflow-hidden pt-36 sm:pt-40">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
 
@@ -134,19 +152,19 @@ export default function Hero() {
         <Sparkles size={30} />
       </motion.div>
 
-      <div className="container-custom relative z-10 min-h-screen flex items-start">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-start w-full pt-28 pb-12 lg:pt-32 lg:pb-0">
+      <div className="container-custom relative z-10 min-h-screen flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-12 pb-12 lg:pt-16 lg:pb-0">
           {/* Left side - 3D Floating Image Cards */}
-          <div 
-            className="relative h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1"
-            style={{ 
+          <div
+            className="relative h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1 mt-6 lg:mt-6 translate-y-4 lg:translate-y-6"
+            style={{
               perspective: "1200px",
               perspectiveOrigin: "center center",
               transformStyle: "preserve-3d",
             }}
           >
             {/* 3D Scene Container */}
-            <div 
+            <div
               className="relative w-full h-full"
               style={{ transformStyle: "preserve-3d" }}
             >
@@ -154,7 +172,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[0]}
                 style={{
-                  top: "0px",
+                  top: "40px",
                   left: "25px",
                   width: "140px",
                   height: "100px",
@@ -169,7 +187,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[2]}
                 style={{
-                  top: "25px",
+                  top: "65px",
                   left: "120px",
                   width: "260px",
                   height: "190px",
@@ -181,7 +199,8 @@ export default function Hero() {
                 className="rounded-3xl"
                 cardStyle={{
                   ...glassCardStyle,
-                  boxShadow: "0 15px 50px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.15)",
+                  boxShadow:
+                    "0 15px 50px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.15)",
                 }}
               />
 
@@ -189,7 +208,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[1]}
                 style={{
-                  top: "0px",
+                  top: "40px",
                   left: "340px",
                   width: "150px",
                   height: "180px",
@@ -204,7 +223,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[3]}
                 style={{
-                  top: "130px",
+                  top: "170px",
                   left: "420px",
                   width: "130px",
                   height: "95px",
@@ -220,7 +239,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[5]}
                 style={{
-                  top: "150px",
+                  top: "190px",
                   left: "-25px",
                   width: "100px",
                   height: "80px",
@@ -236,7 +255,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[4]}
                 style={{
-                  top: "210px",
+                  top: "250px",
                   left: "30px",
                   width: "210px",
                   height: "155px",
@@ -247,7 +266,8 @@ export default function Hero() {
                 floatAmplitude={8}
                 cardStyle={{
                   ...glassCardStyle,
-                  boxShadow: "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.12)",
+                  boxShadow:
+                    "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.12)",
                 }}
               />
 
@@ -255,7 +275,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[6]}
                 style={{
-                  top: "280px",
+                  top: "320px",
                   left: "200px",
                   width: "160px",
                   height: "140px",
@@ -270,7 +290,7 @@ export default function Hero() {
               <Card3D
                 image={heroImages[7]}
                 style={{
-                  top: "230px",
+                  top: "270px",
                   left: "360px",
                   width: "130px",
                   height: "130px",
@@ -288,34 +308,71 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2 px-2 sm:px-0 gap-8"
+            className="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2 px-4 sm:px-0 gap-8 justify-center lg:justify-start mt-2 lg:mt-4"
           >
+            {/* Eyebrow badge */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-white/80 shadow-sm px-4 py-2 backdrop-blur-md">
+              <span className="h-2 w-2 rounded-full bg-[#037ef3] animate-pulse" />
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#234934]/80">
+                Global Volunteer · Sri Lanka
+              </span>
+            </div>
+
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#234934] leading-tight">
-              <span className="italic">Volunteer Abroad.</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-tight max-w-xl gradient-text">
+              Volunteer Abroad.
               <br />
-              <span className="italic">Create Impact.</span>
+              Create Real Impact.
               <br />
-              <span className="italic">Grow Yourself.</span>
+              Grow Yourself.
             </h1>
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg md:text-xl text-[#234934]/80 max-w-xl leading-relaxed">
-              Explore verified Global Volunteer projects, gain international
-              exposure, and make a real social impact through AIESEC in SLIIT.
+              Explore curated Global Volunteer experiences designed for{" "}
+              <span className="font-semibold text-[#234934]">
+                meaningful impact, personal growth
+              </span>{" "}
+              and unforgettable stories. Get matched with projects that fit your
+              skills, passions and timeline.
             </p>
 
-            {/* CTA Button */}
-            <Link href="/projects">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary flex items-center gap-2"
-              >
-                Explore
-                <ArrowUpRight size={20} />
-              </motion.button>
-            </Link>
+            {/* Primary actions */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-5">
+              <Link href="/projects">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  Explore projects
+                  <ArrowUpRight size={20} />
+                </motion.button>
+              </Link>
+
+              <Link href="#experiences">
+                <button className="btn-secondary flex items-center gap-2 bg-white/70 border-[#234934]/20 text-[#234934] hover:bg-[#234934] hover:text-white">
+                  View stories
+                </button>
+              </Link>
+            </div>
+
+            {/* Social proof / stats */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-10 text-sm text-[#234934]/70 mt-2 sm:mt-4">
+              <div>
+                <p className="text-2xl sm:text-3xl font-semibold text-[#037ef3]">
+                  120+
+                </p>
+                <p>active volunteer projects</p>
+              </div>
+              <div className="h-10 w-px bg-[#234934]/15 hidden sm:block" />
+              <div>
+                <p className="text-2xl sm:text-3xl font-semibold text-[#234934]">
+                  40+
+                </p>
+                <p>countries to explore</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
