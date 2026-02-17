@@ -26,7 +26,7 @@ export default function OpportunityProviders() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="ops" className="section-padding bg-[#f1f3e9]" ref={ref}>
+    <section id="ops" className="section-padding bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" ref={ref}>
       <div className="container-custom">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
