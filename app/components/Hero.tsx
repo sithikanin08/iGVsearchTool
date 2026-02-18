@@ -179,8 +179,11 @@ export default function Hero() {
       {/* Modern particle animation background */}
       <HeroParticleBackground />
 
-      <div className="container-custom relative z-10 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-8 pb-12 lg:pt-10 lg:pb-0">
+      {/* Full-width flex wrapper: centers the content block so left/right gaps are equal */}
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center">
+        {/* Content block: max-width + equal side padding; no w-full so it can center in the flex parent */}
+        <div className="relative max-w-7xl w-full px-6 sm:px-8 lg:px-10" style={{ maxWidth: 1280 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-8 pb-6 lg:pt-10 lg:pb-4">
           {/* Left side - 3D Floating Image Cards */}
           <div
             className="relative h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1 mt-6 lg:mt-6 translate-y-4 lg:translate-y-6"
@@ -421,24 +424,8 @@ export default function Hero() {
                 </motion.button>
               </Link>
             </div>
-
-            {/* Social proof / stats */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-10 text-sm text-[#234934]/70 mt-2 sm:mt-4">
-              <div>
-                <p className="text-2xl sm:text-3xl font-semibold text-[#037ef3]">
-                  120+
-                </p>
-                <p>active volunteer projects</p>
-              </div>
-              <div className="h-10 w-px bg-[#234934]/15 hidden sm:block" />
-              <div>
-                <p className="text-2xl sm:text-3xl font-semibold text-[#234934]">
-                  40+
-                </p>
-                <p>countries to explore</p>
-              </div>
-            </div>
           </motion.div>
+          </div>
         </div>
       </div>
     </section>
