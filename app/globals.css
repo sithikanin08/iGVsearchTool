@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #234934;
+  --primary: #037ef3;
   --secondary: #037ef3;
   --background: #f1f3e9;
   --foreground: #1a1a1a;
@@ -59,27 +59,36 @@ body {
 
 /* Floating Animation */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotateX(5deg) rotateY(-15deg);
   }
+
   50% {
     transform: translateY(-20px) rotateX(5deg) rotateY(-15deg);
   }
 }
 
 @keyframes float-delayed {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotateX(3deg) rotateY(-10deg);
   }
+
   50% {
     transform: translateY(-15px) rotateX(3deg) rotateY(-10deg);
   }
 }
 
 @keyframes float-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotateX(8deg) rotateY(-20deg);
   }
+
   50% {
     transform: translateY(-25px) rotateX(8deg) rotateY(-20deg);
   }
@@ -103,7 +112,7 @@ body {
 .image-card-3d {
   transform-style: preserve-3d;
   transform: rotateX(5deg) rotateY(-15deg);
-  box-shadow: 
+  box-shadow:
     20px 20px 60px rgba(0, 0, 0, 0.15),
     -5px -5px 20px rgba(255, 255, 255, 0.8);
   transition: all 0.5s ease;
@@ -111,7 +120,7 @@ body {
 
 .image-card-3d:hover {
   transform: rotateX(0deg) rotateY(0deg) scale(1.05);
-  box-shadow: 
+  box-shadow:
     30px 30px 80px rgba(0, 0, 0, 0.2),
     -10px -10px 30px rgba(255, 255, 255, 0.9);
 }
@@ -139,7 +148,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1a3626;
+  background: #0562c2;
 }
 
 /* Modal Overlay */
@@ -151,6 +160,7 @@ body {
 /* Cyberpunk Diamond Button Styles */
 .btn-primary {
   position: relative;
+  cursor: pointer;
   background: linear-gradient(135deg, #00d4ff 0%, #037ef3 50%, #0066cc 100%);
   color: white;
   padding: 18px 40px;
@@ -161,13 +171,11 @@ body {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid transparent;
   overflow: visible;
-  clip-path: polygon(
-    8px 0%,
-    100% 0%,
-    calc(100% - 8px) 100%,
-    0% 100%
-  );
-  box-shadow: 
+  clip-path: polygon(8px 0%,
+      100% 0%,
+      calc(100% - 8px) 100%,
+      0% 100%);
+  box-shadow:
     0 0 20px rgba(0, 212, 255, 0.5),
     0 0 40px rgba(3, 126, 243, 0.3),
     0 8px 24px rgba(0, 212, 255, 0.4),
@@ -184,12 +192,10 @@ body {
   bottom: -2px;
   background: linear-gradient(135deg, #00d4ff, #037ef3, #0066cc, #00d4ff);
   background-size: 300% 300%;
-  clip-path: polygon(
-    8px 0%,
-    100% 0%,
-    calc(100% - 8px) 100%,
-    0% 100%
-  );
+  clip-path: polygon(8px 0%,
+      100% 0%,
+      calc(100% - 8px) 100%,
+      0% 100%);
   z-index: -1;
   animation: cyberpunk-border 3s ease infinite;
   opacity: 0.8;
@@ -213,7 +219,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.03);
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(0, 212, 255, 0.8),
     0 0 60px rgba(3, 126, 243, 0.5),
     0 12px 32px rgba(0, 212, 255, 0.6),
@@ -233,9 +239,12 @@ body {
 }
 
 @keyframes cyberpunk-border {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -243,6 +252,7 @@ body {
 
 .btn-secondary {
   position: relative;
+  cursor: pointer;
   background: rgba(35, 73, 52, 0.15);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -255,13 +265,11 @@ body {
   border: 2px solid #00cc6a;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: visible;
-  clip-path: polygon(
-    8px 0%,
-    100% 0%,
-    calc(100% - 8px) 100%,
-    0% 100%
-  );
-  box-shadow: 
+  clip-path: polygon(8px 0%,
+      100% 0%,
+      calc(100% - 8px) 100%,
+      0% 100%);
+  box-shadow:
     0 0 15px rgba(0, 204, 106, 0.4),
     0 4px 16px rgba(0, 204, 106, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
@@ -277,12 +285,10 @@ body {
   bottom: -2px;
   background: linear-gradient(135deg, #00ff88, #00cc6a, #00ff88);
   background-size: 300% 300%;
-  clip-path: polygon(
-    8px 0%,
-    100% 0%,
-    calc(100% - 8px) 100%,
-    0% 100%
-  );
+  clip-path: polygon(8px 0%,
+      100% 0%,
+      calc(100% - 8px) 100%,
+      0% 100%);
   z-index: -1;
   animation: cyberpunk-border-secondary 3s ease infinite;
   opacity: 0;
@@ -298,15 +304,13 @@ body {
   background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(0, 204, 106, 0.3));
   transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 0;
-  clip-path: polygon(
-    8px 0%,
-    100% 0%,
-    calc(100% - 8px) 100%,
-    0% 100%
-  );
+  clip-path: polygon(8px 0%,
+      100% 0%,
+      calc(100% - 8px) 100%,
+      0% 100%);
 }
 
-.btn-secondary > * {
+.btn-secondary>* {
   position: relative;
   z-index: 1;
 }
@@ -316,7 +320,7 @@ body {
   color: white;
   background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(0, 204, 106, 0.3), rgba(0, 255, 136, 0.25));
   border-color: #00ff88;
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(0, 255, 136, 0.7),
     0 0 60px rgba(0, 204, 106, 0.5),
     0 12px 32px rgba(0, 255, 136, 0.6),
@@ -339,9 +343,12 @@ body {
 }
 
 @keyframes cyberpunk-border-secondary {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -365,15 +372,18 @@ body {
 
 .card-hover:hover {
   transform: translateY(-10px);
-  box-shadow: 0 25px 50px rgba(35, 73, 52, 0.15);
+  box-shadow: 0 25px 50px rgba(3, 126, 243, 0.12);
 }
 
 /* Sparkle Animation */
 @keyframes sparkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0;
     transform: scale(0);
   }
+
   50% {
     opacity: 1;
     transform: scale(1);
@@ -401,6 +411,7 @@ body {
 @media (min-width: 1024px) {
   .container-custom {
     padding: 0 48px;
+    max-width: 1280px;
   }
 }
 
@@ -418,17 +429,19 @@ body {
 /* Input Styles */
 .input-style {
   background: white;
-  border: 2px solid #e5e7db;
+  border: 2px solid #e2e8f0;
   padding: 14px 20px;
   border-radius: 12px;
   transition: all 0.3s ease;
   width: 100%;
+  color: #1e293b;
+  font-size: 15px;
 }
 
 .input-style:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(35, 73, 52, 0.1);
+  border-color: #037ef3;
+  box-shadow: 0 0 0 4px rgba(3, 126, 243, 0.1);
 }
 
 /* Marquee for OP logos */
@@ -436,6 +449,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }

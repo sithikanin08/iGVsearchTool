@@ -12,22 +12,22 @@ function FloatingParticles() {
   // Create particle positions with a flowing, wind-like distribution
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
-    
+
     for (let i = 0; i < particleCount; i++) {
       // Create a flowing pattern - particles flow from top-left to bottom-right
       const angle = (i / particleCount) * Math.PI * 2;
       const radius = Math.random() * 50 + 20;
-      
+
       // Add wind-like flow direction
       const flowX = (i / particleCount) * 100 - 50;
       const flowY = Math.sin(angle) * 30 + (i / particleCount) * 80 - 40;
       const flowZ = Math.cos(angle) * 20;
-      
+
       positions[i * 3] = flowX + (Math.random() - 0.5) * 30; // X
       positions[i * 3 + 1] = flowY + (Math.random() - 0.5) * 20; // Y
       positions[i * 3 + 2] = flowZ + (Math.random() - 0.5) * 15; // Z
     }
-    
+
     return positions;
   }, []);
 
@@ -36,30 +36,30 @@ function FloatingParticles() {
     if (points.current) {
       const positions = points.current.geometry.attributes.position.array as Float32Array;
       const time = state.clock.elapsedTime;
-      
+
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
-        
+
         // Create flowing, wind-like motion
         const waveX = Math.sin(time * 0.3 + i * 0.01) * 0.5;
         const waveY = Math.cos(time * 0.2 + i * 0.015) * 0.8;
         const waveZ = Math.sin(time * 0.25 + i * 0.02) * 0.3;
-        
+
         // Add downward flow (like rain/diamonds falling)
         positions[i3 + 1] -= 0.02 + Math.sin(time + i) * 0.01;
-        
+
         // Reset particles that fall too low
         if (positions[i3 + 1] < -60) {
           positions[i3 + 1] = 60;
           positions[i3] = (Math.random() - 0.5) * 100;
           positions[i3 + 2] = (Math.random() - 0.5) * 30;
         }
-        
+
         // Add subtle horizontal flow
         positions[i3] += waveX * 0.1;
         positions[i3 + 2] += waveZ * 0.05;
       }
-      
+
       points.current.geometry.attributes.position.needsUpdate = true;
     }
   });
@@ -68,7 +68,7 @@ function FloatingParticles() {
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#234934"
+        color="#037ef3"
         size={0.25}
         sizeAttenuation={true}
         depthWrite={false}
@@ -85,17 +85,17 @@ function DiamondParticles() {
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
-    
+
     for (let i = 0; i < particleCount; i++) {
       // Create diamond-like distribution
       const angle = (i / particleCount) * Math.PI * 4;
       const radius = Math.random() * 60 + 15;
-      
+
       positions[i * 3] = Math.cos(angle) * radius + (Math.random() - 0.5) * 40;
       positions[i * 3 + 1] = (i / particleCount) * 120 - 60 + (Math.random() - 0.5) * 30;
       positions[i * 3 + 2] = Math.sin(angle) * radius * 0.5 + (Math.random() - 0.5) * 20;
     }
-    
+
     return positions;
   }, []);
 
@@ -103,19 +103,19 @@ function DiamondParticles() {
     if (points.current) {
       const positions = points.current.geometry.attributes.position.array as Float32Array;
       const time = state.clock.elapsedTime;
-      
+
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
-        
+
         // Diamond rain effect - particles fall and rotate
         positions[i3 + 1] -= 0.15 + Math.sin(time * 2 + i * 0.1) * 0.05;
-        
+
         // Add rotation effect
         const angle = time * 0.5 + i * 0.01;
         const radius = Math.sqrt(positions[i3] ** 2 + positions[i3 + 2] ** 2);
         positions[i3] = Math.cos(angle) * radius;
         positions[i3 + 2] = Math.sin(angle) * radius;
-        
+
         // Reset particles
         if (positions[i3 + 1] < -70) {
           positions[i3 + 1] = 70;
@@ -123,7 +123,7 @@ function DiamondParticles() {
           positions[i3 + 2] = (Math.random() - 0.5) * 30;
         }
       }
-      
+
       points.current.geometry.attributes.position.needsUpdate = true;
     }
   });
@@ -149,14 +149,14 @@ function GlowingParticles() {
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
-    
+
     for (let i = 0; i < particleCount; i++) {
       // Create glowing particles in the background
       positions[i * 3] = (Math.random() - 0.5) * 120;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 120;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
     }
-    
+
     return positions;
   }, []);
 
@@ -164,14 +164,14 @@ function GlowingParticles() {
     if (points.current) {
       const positions = points.current.geometry.attributes.position.array as Float32Array;
       const time = state.clock.elapsedTime;
-      
+
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
-        
+
         // Gentle floating motion
         positions[i3 + 1] += Math.sin(time * 0.5 + i * 0.01) * 0.02;
         positions[i3] += Math.cos(time * 0.3 + i * 0.015) * 0.015;
-        
+
         // Keep particles in bounds
         if (Math.abs(positions[i3]) > 60) {
           positions[i3] = (Math.random() - 0.5) * 100;
@@ -180,7 +180,7 @@ function GlowingParticles() {
           positions[i3 + 1] = (Math.random() - 0.5) * 100;
         }
       }
-      
+
       points.current.geometry.attributes.position.needsUpdate = true;
     }
   });

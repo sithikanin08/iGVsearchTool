@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
@@ -19,6 +19,7 @@ const opportunityProviders = [
     description: "Leading marine conservation organization dedicated to protecting Sri Lanka's coastal ecosystems through community engagement and sustainable practices.",
     website: "oceanguardians.lk",
     projects: 3,
+    weeks: 5,
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ const opportunityProviders = [
     description: "Grassroots healthcare organization bringing medical awareness and preventive care to rural communities across central Sri Lanka.",
     website: "lankahealthinit.org",
     projects: 2,
+    weeks: 4,
   },
   {
     id: 3,
@@ -39,6 +41,7 @@ const opportunityProviders = [
     description: "Innovative education initiative connecting global volunteers with local schools to enhance learning experiences and cultural exchange.",
     website: "edubridge.lk",
     projects: 4,
+    weeks: 5,
   },
   {
     id: 4,
@@ -49,6 +52,7 @@ const opportunityProviders = [
     description: "Environmental conservation collective focused on reforestation, sustainable agriculture, and climate action across Sri Lanka's hill country.",
     website: "greenlanka.org",
     projects: 3,
+    weeks: 4,
   },
   {
     id: 5,
@@ -59,6 +63,7 @@ const opportunityProviders = [
     description: "Dynamic organization empowering young Sri Lankans through leadership programs, skill development, and community engagement initiatives.",
     website: "youthempower.lk",
     projects: 2,
+    weeks: 5,
   },
   {
     id: 6,
@@ -69,6 +74,7 @@ const opportunityProviders = [
     description: "Community-driven tourism initiative promoting sustainable travel and cultural preservation in Sri Lanka's ancient cities.",
     website: "heritagelk.com",
     projects: 2,
+    weeks: 4,
   },
 ];
 
@@ -187,7 +193,7 @@ function FloatingParticles() {
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#234934"
+        color="#037ef3"
         size={0.2}
         sizeAttenuation={true}
         depthWrite={false}
@@ -321,13 +327,17 @@ function ProjectsParticleBackground() {
   );
 }
 
-// Glassmorphic card style
-const glassCardStyle = {
-  background: "rgba(255, 255, 255, 0.65)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  border: "1px solid rgba(255, 255, 255, 0.4)",
-  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.08)",
+// Project Card Style - Solid, clean, GAPLS alignment
+const projectCardStyle = {
+  background: "#ffffff",
+  borderRadius: "32px",
+  boxShadow: "0 20px 50px -12px rgba(0,0,0,0.15)",
+  border: "1px solid rgba(0,0,0,0.03)",
+  overflow: "hidden",
+  display: "flex",
+  flexDirection: "column" as const,
+  height: "100%",
+  padding: "24px", // Inset Padding
 };
 
 interface Project {
@@ -351,6 +361,7 @@ interface OpProvider {
   description: string;
   website: string;
   projects: number;
+  weeks: number;
 }
 
 export default function Projects() {
@@ -370,23 +381,14 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden hero-gradient"
       ref={ref}
-      style={{ background: "linear-gradient(180deg, #e8f4f8 0%, #f1f3e9 100%)" }}
     >
-      {/* Cinematic Gradient Divider from About */}
-      <div
-        style={{
-          height: "1px",
-          marginTop: "16px",
-          marginBottom: "16px",
-          background:
-            "linear-gradient(to right, transparent, rgba(59, 130, 246, 0.35), transparent)",
-        }}
-      />
+      {/* Background overlay - exact match to Hero */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
 
       {/* Main section content */}
-      <div className="relative py-20 lg:py-32">
+      <div className="relative" style={{ paddingTop: "40px", paddingBottom: "60px" }}>
         {/* Atmospheric blur blobs */}
         <motion.div
           animate={{
@@ -432,28 +434,43 @@ export default function Projects() {
         <ProjectsParticleBackground />
 
         {/* Content container */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
+        <div
+          className="relative z-10 w-full"
+          style={{
+            maxWidth: "1280px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            paddingLeft: "clamp(40px, 8vw, 96px)",
+            paddingRight: "clamp(40px, 8vw, 96px)",
+          }}
+        >
+          {/* Section Header - matching About structure exactly */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            style={{ marginBottom: "0" }}
+          >
+            {/* Label */}
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="max-w-4xl mx-auto"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{
+                display: "block",
+                fontSize: "13px",
+                fontWeight: 600,
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#037ef3",
+                marginBottom: "8px",
+              }}
             >
-              <span
-                style={{
-                  display: "inline-block",
-                  fontSize: "13px",
-                  letterSpacing: "0.22em",
-                  color: "#037ef3",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  marginBottom: "16px",
-                }}
-              >
-                Our Projects
-              </span>
+              Our Projects
+            </motion.span>
+
+            {/* Heading + View All row */}
+            <div className="flex items-end justify-between gap-4">
               <h2
                 style={{
                   fontSize: "clamp(38px, 4vw, 54px)",
@@ -461,34 +478,49 @@ export default function Projects() {
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   color: "#1e293b",
-                  marginBottom: "0",
+                  maxWidth: "900px",
                 }}
               >
-                Explore Opportunities That{" "}
+                Explore Opportunities That
+                <br />
                 <span className="bg-gradient-to-r from-[#037ef3] to-[#00d4ff] bg-clip-text text-transparent">
                   Shape the World
                 </span>
               </h2>
-            </motion.div>
-          </div>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300 group shrink-0"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "#037ef3",
+                  paddingBottom: "6px",
+                }}
+              >
+                View All Projects
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10" style={{ marginTop: "48px" }}>
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
+                whileHover={{ y: -8, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.12)" }}
                 transition={{
-                  duration: 0.6,
+                  duration: 0.5,
                   delay: 0.1 * index,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: "easeOut",
                 }}
-                className="group flex flex-col h-full rounded-3xl overflow-hidden"
-                style={glassCardStyle}
+                className="group relative"
+                style={projectCardStyle}
               >
-                {/* Image Container */}
-                <div className="relative overflow-hidden shrink-0 aspect-[16/10]">
+                {/* Image Container - Rounded for Inset Look */}
+                <div className="relative overflow-hidden shrink-0 aspect-[4/3] w-full rounded-2xl">
                   <motion.img
                     src={project.image}
                     alt={project.name}
@@ -496,26 +528,27 @@ export default function Projects() {
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   />
+                  {/* Subtle gradient overlay at bottom of image */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    className="absolute inset-x-0 bottom-0 h-24"
                     style={{
-                      background:
-                        "linear-gradient(to top, rgba(15,23,42,0.5) 0%, transparent 60%)",
+                      background: "linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 100%)",
                     }}
                   />
                 </div>
 
-                {/* Card Content */}
-                <div className="flex flex-col flex-grow p-7">
+                {/* Card Content - Normal Padding since container has inset padding */}
+                <div className="flex flex-col flex-grow pt-6">
                   {/* Project Title */}
                   <h3
-                    className="transition-colors duration-300"
                     style={{
-                      fontSize: "22px",
-                      fontWeight: 700,
-                      color: "#037ef3",
-                      marginBottom: "14px",
+                      fontSize: "24px",
+                      fontWeight: 800,
+                      color: "#037ef3", // GAPLS Blue
+                      marginBottom: "12px",
+                      marginTop: "4px",
                       letterSpacing: "-0.01em",
+                      lineHeight: 1.2
                     }}
                   >
                     {project.name}
@@ -523,32 +556,432 @@ export default function Projects() {
 
                   {/* Description */}
                   <p
-                    className="line-clamp-3 flex-grow"
+                    className="line-clamp-3"
                     style={{
                       fontSize: "15px",
-                      lineHeight: 1.7,
-                      color: "rgba(30, 41, 59, 0.75)",
+                      lineHeight: 1.8,
+                      color: "#475569", // Slate 600
                       marginBottom: "24px",
+                      flexGrow: 1
                     }}
                   >
                     {project.brief}
                   </p>
 
-                  {/* Cyberfunk CTA Button */}
+                  {/* Cyberpunk/GAPLS Button - Reduced Width */}
                   <motion.button
                     onClick={() => setSelectedProject(project)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative w-full overflow-hidden rounded-xl transition-all duration-300 group/btn"
+                    className="relative overflow-hidden rounded-xl transition-all duration-300 group/btn w-fit cursor-pointer"
                     style={{
-                      padding: "15px 28px",
+                      padding: "12px 24px",
                       background:
-                        "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
-                      boxShadow:
-                        "0 4px 20px rgba(3, 126, 243, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                        "linear-gradient(135deg, #00d4ff 0%, #037ef3 100%)",
+                      boxShadow: "0 4px 12px rgba(3, 126, 243, 0.25)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px"
                     }}
                   >
-                    {/* Animated shimmer effect */}
+                    <span
+                      className="relative z-10 font-bold text-white tracking-wide"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Learn More
+                    </span>
+                    <ArrowUpRight
+                      size={18}
+                      className="text-white relative z-10 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                    />
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {
+          selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+              style={{
+                background: "rgba(15, 23, 42, 0.75)",
+                backdropFilter: "blur(16px)",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col lg:flex-row"
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "24px",
+                  boxShadow: "0 50px 120px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                {/* Modal Left: Full-bleed Image */}
+                <div className="relative w-full lg:w-[45%] lg:min-h-[600px] shrink-0">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.name}
+                    className="w-full h-64 lg:h-full object-cover"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)",
+                    }}
+                  />
+
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20 group"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.15)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                    }}
+                  >
+                    <X size={18} className="text-white transition-transform group-hover:rotate-90" />
+                  </button>
+
+                  <h3
+                    className="absolute bottom-8 left-8 right-8"
+                    style={{
+                      fontSize: "clamp(28px, 3vw, 36px)",
+                      fontWeight: 800,
+                      color: "white",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1.15,
+                      textShadow: "0 2px 20px rgba(0,0,0,0.4)"
+                    }}
+                  >
+                    {selectedProject.name}
+                  </h3>
+                </div>
+
+                {/* Modal Right: Content - Generous margins all around */}
+                <div className="w-full lg:w-[55%] flex flex-col overflow-y-auto" style={{ maxHeight: "90vh" }}>
+                  <div className="flex flex-col flex-grow" style={{ padding: "clamp(40px, 5vw, 56px) clamp(36px, 4.5vw, 52px)" }}>
+
+                    {/* DESCRIPTION Section */}
+                    <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                      <h4
+                        style={{
+                          fontSize: "13px",
+                          fontWeight: 800,
+                          color: "#0f172a",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Description
+                      </h4>
+                      <p
+                        style={{
+                          fontSize: "15px",
+                          lineHeight: 1.9,
+                          color: "#374151",
+                        }}
+                      >
+                        {selectedProject.fullDescription}
+                      </p>
+                    </div>
+
+                    {/* SDG GOALS Section */}
+                    <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                      <h4
+                        style={{
+                          fontSize: "13px",
+                          fontWeight: 800,
+                          color: "#0f172a",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        SDG Goals
+                      </h4>
+                      <div className="flex flex-wrap gap-3">
+                        {selectedProject.sdg.map((goal, idx) => (
+                          <span
+                            key={idx}
+                            style={{
+                              padding: "10px 20px",
+                              background: "#f1f5f9",
+                              color: "#334155",
+                              fontSize: "14px",
+                              borderRadius: "8px",
+                              fontWeight: 500,
+                              border: "1px solid #e2e8f0"
+                            }}
+                          >
+                            {goal}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* OPPORTUNITY PROVIDERS Section */}
+                    {(() => {
+                      const op = opportunityProviders.find(
+                        (p) => p.id === selectedProject.opId
+                      );
+                      return op ? (
+                        <div>
+                          <h4
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: 800,
+                              color: "#0f172a",
+                              textTransform: "uppercase",
+                              letterSpacing: "0.08em",
+                              marginBottom: "20px",
+                            }}
+                          >
+                            Opportunity Providers
+                          </h4>
+                          <div
+                            className="flex items-center gap-4 cursor-pointer group/op transition-all duration-200"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOPClick(op.id);
+                            }}
+                          >
+                            <img
+                              src={op.photo}
+                              alt={op.name}
+                              className="w-14 h-14 rounded-full object-cover ring-2 ring-slate-100 group-hover/op:ring-[#037ef3]/30 transition-all"
+                            />
+                            <div>
+                              <p className="font-bold text-[16px] text-slate-800 group-hover/op:text-[#037ef3] transition-colors">
+                                {op.name}
+                              </p>
+                              <p className="text-[14px] text-slate-500">
+                                {op.organization}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : null;
+                    })()}
+
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )
+        }
+      </AnimatePresence >
+
+      {/* Opportunity Provider Modal */}
+      <AnimatePresence>
+        {
+          selectedOP && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedOP(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+              style={{
+                background: "rgba(15, 23, 42, 0.75)",
+                backdropFilter: "blur(16px)",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "24px",
+                  boxShadow: "0 50px 120px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                {/* Close Button - Inside the card */}
+                <button
+                  onClick={() => setSelectedOP(null)}
+                  className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20 group"
+                  style={{
+                    background: "#f1f5f9",
+                    border: "1px solid #e2e8f0",
+                  }}
+                >
+                  <X size={18} className="text-slate-500 transition-transform group-hover:rotate-90 group-hover:text-slate-800" />
+                </button>
+
+                {/* Content with generous padding */}
+                <div style={{ padding: "clamp(40px, 5vw, 56px) clamp(36px, 4.5vw, 52px)" }}>
+
+                  {/* Profile Header */}
+                  <div className="flex items-center gap-5" style={{ marginBottom: "32px", paddingBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                    <div className="relative shrink-0">
+                      <img
+                        src={selectedOP.photo}
+                        alt={selectedOP.name}
+                        className="w-20 h-20 rounded-full object-cover ring-2 ring-slate-100"
+                      />
+                      <div
+                        className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full border-3 border-white flex items-center justify-center"
+                        style={{ background: "#22c55e", borderWidth: "3px", borderColor: "white" }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <h3
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: 800,
+                          color: "#0f172a",
+                          letterSpacing: "-0.02em",
+                          lineHeight: 1.2,
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {selectedOP.name}
+                      </h3>
+                      <p style={{ fontSize: "15px", color: "#037ef3", fontWeight: 600 }}>
+                        {selectedOP.organization}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* ABOUT Section */}
+                  <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      About
+                    </h4>
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        lineHeight: 1.9,
+                        color: "#374151",
+                      }}
+                    >
+                      {selectedOP.description}
+                    </p>
+                  </div>
+
+                  {/* LOCATION Section */}
+                  <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      Location
+                    </h4>
+                    <p className="text-[15px] text-slate-600 font-medium">
+                      {selectedOP.location}
+                    </p>
+                  </div>
+
+                  {/* ACTIVE PROJECTS Section - Dynamically listed */}
+                  {(() => {
+                    const opProjects = projects.filter(p => p.opId === selectedOP.id);
+                    const uniqueDurations = [...new Set(opProjects.map(p => p.duration))];
+                    return (
+                      <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                        <h4
+                          style={{
+                            fontSize: "13px",
+                            fontWeight: 800,
+                            color: "#0f172a",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.08em",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          Active Projects ({opProjects.length})
+                        </h4>
+                        <div className="flex flex-col gap-3">
+                          {opProjects.map((proj) => (
+                            <div
+                              key={proj.id}
+                              className="flex items-center justify-between rounded-lg transition-colors"
+                              style={{
+                                padding: "14px 18px",
+                                background: "#f8fafc",
+                                border: "1px solid #e2e8f0",
+                                borderRadius: "10px",
+                              }}
+                            >
+                              <p style={{ fontSize: "15px", fontWeight: 600, color: "#1e293b" }}>
+                                {proj.name}
+                              </p>
+                              <span
+                                style={{
+                                  fontSize: "13px",
+                                  fontWeight: 600,
+                                  color: "#037ef3",
+                                  padding: "4px 12px",
+                                  background: "rgba(3, 126, 243, 0.08)",
+                                  borderRadius: "6px",
+                                }}
+                              >
+                                {proj.duration}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Duration options summary */}
+                        <div style={{ marginTop: "16px" }}>
+                          <p style={{ fontSize: "13px", color: "#64748b", fontWeight: 500 }}>
+                            Available durations: {uniqueDurations.join(" / ")}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Apply Now Button */}
+                  <a
+                    href="https://expa.aiesec.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-full overflow-hidden rounded-xl transition-all duration-300 group/btn flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                    style={{
+                      padding: "18px 32px",
+                      background: "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
+                    }}
+                  >
                     <motion.div
                       className="absolute inset-0 opacity-0 group-hover/btn:opacity-100"
                       animate={{
@@ -560,498 +993,28 @@ export default function Projects() {
                         ease: "linear",
                       }}
                       style={{
-                        background:
-                          "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)",
+                        background: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
                         backgroundSize: "200% 100%",
                       }}
                     />
-
                     <span
-                      className="relative z-10 flex items-center justify-center gap-2 font-semibold text-white"
-                      style={{ fontSize: "15px" }}
+                      className="relative z-10 flex items-center justify-center gap-2 font-bold text-white tracking-wide"
+                      style={{ fontSize: "16px" }}
                     >
-                      Learn More
+                      Apply Now
                       <ArrowUpRight
-                        size={16}
-                        className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        size={20}
+                        className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
                       />
                     </span>
+                  </a>
 
-                    {/* Glow effect */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 blur-xl transition-opacity duration-300"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
-                      }}
-                    />
-                  </motion.button>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-            style={{
-              background: "rgba(15, 23, 42, 0.7)",
-              backdropFilter: "blur(12px)",
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-5xl max-h-[90vh] overflow-y-auto flex flex-col lg:flex-row"
-              style={{
-                background: "rgba(255, 255, 255, 0.98)",
-                backdropFilter: "blur(30px)",
-                borderRadius: "32px",
-                boxShadow: "0 50px 120px rgba(0, 0, 0, 0.3)",
-              }}
-            >
-              {/* Modal Left: Image */}
-              <div className="relative w-full lg:w-1/2 lg:min-h-[600px]">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.name}
-                  className="w-full h-72 lg:h-full object-cover"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(15,23,42,0.8) 0%, transparent 70%)",
-                  }}
-                />
-
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-5 right-5 lg:left-5 lg:right-auto w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.95)",
-                    backdropFilter: "blur(12px)",
-                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-                  }}
-                >
-                  <X size={22} style={{ color: "#1e293b" }} />
-                </button>
-
-                <h3
-                  className="absolute bottom-8 left-8 right-8"
-                  style={{
-                    fontSize: "clamp(28px, 3.5vw, 38px)",
-                    fontWeight: 800,
-                    color: "white",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {selectedProject.name}
-                </h3>
-              </div>
-
-              {/* Modal Right: Content */}
-              <div className="w-full lg:w-1/2 p-8 md:p-10 lg:p-12 flex flex-col">
-                <p
-                  style={{
-                    fontSize: "17px",
-                    lineHeight: 1.8,
-                    color: "rgba(30, 41, 59, 0.85)",
-                    marginBottom: "32px",
-                  }}
-                >
-                  {selectedProject.fullDescription}
-                </p>
-
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div
-                    style={{
-                      background: "rgba(3, 126, 243, 0.08)",
-                      borderRadius: "18px",
-                      padding: "20px",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: "11px",
-                        color: "rgba(30,41,59,0.5)",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        marginBottom: "8px",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Duration
-                    </p>
-                    <p
-                      style={{
-                        color: "#1e293b",
-                        fontWeight: 600,
-                        fontSize: "15px",
-                      }}
-                    >
-                      {selectedProject.duration}
-                    </p>
-                  </div>
-                  <div
-                    style={{
-                      background: "rgba(3, 126, 243, 0.08)",
-                      borderRadius: "18px",
-                      padding: "20px",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: "11px",
-                        color: "rgba(30,41,59,0.5)",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        marginBottom: "8px",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Location
-                    </p>
-                    <p
-                      style={{
-                        color: "#1e293b",
-                        fontWeight: 600,
-                        fontSize: "15px",
-                      }}
-                    >
-                      {selectedProject.location}
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ marginBottom: "32px" }}>
-                  <p
-                    style={{
-                      fontSize: "11px",
-                      color: "rgba(30,41,59,0.5)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.12em",
-                      marginBottom: "14px",
-                      fontWeight: 600,
-                    }}
-                  >
-                    SDG Goals
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.sdg.map((goal, idx) => (
-                      <span
-                        key={idx}
-                        style={{
-                          padding: "10px 16px",
-                          background: "rgba(3, 126, 243, 0.1)",
-                          color: "#037ef3",
-                          fontSize: "14px",
-                          borderRadius: "999px",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {goal}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Opportunity Provider in Modal */}
-                {(() => {
-                  const op = opportunityProviders.find(
-                    (p) => p.id === selectedProject.opId
-                  );
-                  return op ? (
-                    <div
-                      className="flex items-center gap-4 p-4 rounded-2xl mb-8 cursor-pointer transition-all duration-300 hover:bg-[#037ef3]/5"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOPClick(op.id);
-                      }}
-                      style={{
-                        background: "rgba(3, 126, 243, 0.06)",
-                        border: "1px solid rgba(3, 126, 243, 0.2)",
-                      }}
-                    >
-                      <img
-                        src={op.photo}
-                        alt={op.name}
-                        className="w-14 h-14 rounded-full object-cover ring-2 ring-white"
-                      />
-                      <div className="flex-grow">
-                        <p
-                          className="font-semibold"
-                          style={{ color: "#1e293b", fontSize: "15px" }}
-                        >
-                          {op.name}
-                        </p>
-                        <p
-                          className="text-sm"
-                          style={{ color: "rgba(30, 41, 59, 0.6)" }}
-                        >
-                          {op.organization} • {op.location}
-                        </p>
-                      </div>
-                      <ExternalLink size={18} style={{ color: "#037ef3" }} />
-                    </div>
-                  ) : null;
-                })()}
-
-                {/* Cyberfunk CTA */}
-                <Link
-                  href="/projects"
-                  className="relative w-full overflow-hidden rounded-xl transition-all duration-300 group/btn mt-auto"
-                  style={{
-                    padding: "16px 32px",
-                    background:
-                      "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
-                    boxShadow:
-                      "0 8px 30px rgba(3, 126, 243, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.3)",
-                  }}
-                >
-                  <motion.div
-                    className="absolute inset-0 opacity-0 group-hover/btn:opacity-100"
-                    animate={{
-                      backgroundPosition: ["0% 0%", "200% 0%"],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
-                      backgroundSize: "200% 100%",
-                    }}
-                  />
-                  <span
-                    className="relative z-10 flex items-center justify-center gap-2 font-semibold text-white"
-                    style={{ fontSize: "16px" }}
-                  >
-                    Apply Now
-                    <ArrowUpRight
-                      size={18}
-                      className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
-                    />
-                  </span>
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 blur-2xl transition-opacity duration-300"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
-                    }}
-                  />
-                </Link>
-              </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Opportunity Provider Modal */}
-      <AnimatePresence>
-        {selectedOP && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedOP(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-            style={{
-              background: "rgba(15, 23, 42, 0.7)",
-              backdropFilter: "blur(12px)",
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-              style={{
-                background: "rgba(255, 255, 255, 0.98)",
-                backdropFilter: "blur(30px)",
-                borderRadius: "32px",
-                boxShadow: "0 50px 120px rgba(0, 0, 0, 0.3)",
-                padding: "48px",
-              }}
-            >
-              <button
-                onClick={() => setSelectedOP(null)}
-                className="absolute top-6 right-6 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                style={{
-                  background: "rgba(255, 255, 255, 0.95)",
-                  backdropFilter: "blur(12px)",
-                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-                }}
-              >
-                <X size={22} style={{ color: "#1e293b" }} />
-              </button>
-
-              <div className="flex flex-col items-center text-center mb-8">
-                <div className="relative mb-6">
-                  <img
-                    src={selectedOP.photo}
-                    alt={selectedOP.name}
-                    className="w-28 h-28 rounded-full object-cover ring-4 ring-white shadow-xl"
-                  />
-                  <div
-                    className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full border-4 border-white"
-                    style={{ background: "#10b981" }}
-                  />
-                </div>
-                <h3
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: 800,
-                    color: "#1e293b",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {selectedOP.name}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: "#037ef3",
-                    fontWeight: 600,
-                    marginBottom: "4px",
-                  }}
-                >
-                  {selectedOP.organization}
-                </p>
-                <p style={{ fontSize: "14px", color: "rgba(30, 41, 59, 0.6)" }}>
-                  📍 {selectedOP.location}
-                </p>
-              </div>
-
-              <p
-                style={{
-                  fontSize: "16px",
-                  lineHeight: 1.75,
-                  color: "rgba(30, 41, 59, 0.85)",
-                  marginBottom: "32px",
-                }}
-              >
-                {selectedOP.description}
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div
-                  style={{
-                    background: "rgba(3, 126, 243, 0.08)",
-                    borderRadius: "18px",
-                    padding: "20px",
-                    textAlign: "center",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: "28px",
-                      fontWeight: 700,
-                      color: "#037ef3",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    {selectedOP.projects}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      color: "rgba(30, 41, 59, 0.6)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Active Projects
-                  </p>
-                </div>
-                <div
-                  style={{
-                    background: "rgba(3, 126, 243, 0.08)",
-                    borderRadius: "18px",
-                    padding: "20px",
-                    textAlign: "center",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: "28px",
-                      fontWeight: 700,
-                      color: "#10b981",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    ✓
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      color: "rgba(30, 41, 59, 0.6)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Verified Partner
-                  </p>
-                </div>
-              </div>
-
-              <a
-                href={`https://${selectedOP.website}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-full overflow-hidden rounded-xl transition-all duration-300 group/btn flex items-center justify-center"
-                style={{
-                  padding: "16px 32px",
-                  background:
-                    "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
-                  boxShadow:
-                    "0 8px 30px rgba(3, 126, 243, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <motion.div
-                  className="absolute inset-0 opacity-0 group-hover/btn:opacity-100"
-                  animate={{
-                    backgroundPosition: ["0% 0%", "200% 0%"],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{
-                    background:
-                      "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
-                    backgroundSize: "200% 100%",
-                  }}
-                />
-                <span
-                  className="relative z-10 flex items-center gap-2 font-semibold text-white"
-                  style={{ fontSize: "16px" }}
-                >
-                  Visit Website
-                  <ExternalLink
-                    size={18}
-                    className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
-                  />
-                </span>
-              </a>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+          )
+        }
+      </AnimatePresence >
+    </section >
   );
 }

@@ -2,8 +2,9 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { X, ArrowRight, ArrowUpRight, Quote } from "lucide-react";
+import { X, ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import SectionParticleBackground from "./SectionParticleBackground";
 
 // Experience data
 const experiences = [
@@ -54,12 +55,14 @@ const experiences = [
 ];
 
 // Glassmorphic card style
-const glassCardStyle = {
-  background: "rgba(255, 255, 255, 0.55)",
-  backdropFilter: "blur(16px)",
-  WebkitBackdropFilter: "blur(16px)",
-  borderRadius: "28px",
-  boxShadow: "0 30px 80px rgba(0, 0, 0, 0.08)",
+// Experience Card Style - Solid, clean, Cyberpunk Inset alignment
+const experienceCardStyle = {
+  background: "#ffffff",
+  borderRadius: "32px",
+  boxShadow: "0 10px 40px -10px rgba(0,0,0,0.08)", // Softer, more natural shadow
+  border: "1px solid rgba(0,0,0,0.03)",
+  overflow: "hidden",
+  padding: "24px", // Inset Padding
 };
 
 interface Experience {
@@ -82,47 +85,69 @@ export default function Experiences() {
   return (
     <section id="experiences" className="relative overflow-hidden" ref={ref}>
       {/* Main section content */}
-      <div style={{ paddingTop: "100px", paddingBottom: "140px", position: "relative" }}>
-        {/* Background gradient */}
-        <div 
-          className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]"
+      <div style={{ paddingTop: "40px", paddingBottom: "60px", position: "relative" }}>
+        {/* Background - matching About section */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%)" }}
         />
+        {/* Particle background - intensity 0.35 (gradual fade from Projects) */}
+        <SectionParticleBackground intensity={0.35} />
 
         {/* Content container */}
-        <div 
+        <div
           className="relative z-10"
-          style={{ 
-            maxWidth: "1320px", 
-            marginLeft: "auto", 
+          style={{
+            maxWidth: "1280px",
+            marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "24px",
-            paddingRight: "24px"
+            paddingLeft: "clamp(40px, 8vw, 96px)",
+            paddingRight: "clamp(40px, 8vw, 96px)",
           }}
         >
           {/* Section Header */}
-          <div className="mb-12">
-            {/* Top row: Label + View All */}
-            <div className="flex justify-between items-center mb-4">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
+          <div style={{ marginBottom: "0" }}>
+            {/* Label */}
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              style={{
+                display: "block",
+                fontSize: "13px",
+                letterSpacing: "0.25em",
+                color: "#037ef3",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginBottom: "8px",
+              }}
+            >
+              Volunteer Stories
+            </motion.span>
+
+            {/* Heading + View All row */}
+            <div className="flex items-end justify-between gap-4">
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                style={{ 
-                  fontSize: "13px",
-                  letterSpacing: "0.18em",
-                  color: "#2563EB",
-                  fontWeight: 600,
-                  textTransform: "uppercase"
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                style={{
+                  fontSize: "clamp(38px, 4.5vw, 56px)",
+                  fontWeight: 800,
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.02em",
+                  maxWidth: "880px",
+                  color: "#1e293b",
                 }}
               >
-                Volunteer Stories
-              </motion.span>
-              
-              {/* View All Link */}
+                Experiences That Matter
+              </motion.h2>
+
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="shrink-0"
               >
                 <Link
                   href="/experiences"
@@ -130,7 +155,8 @@ export default function Experiences() {
                   style={{
                     fontSize: "14px",
                     fontWeight: 600,
-                    color: "#2563EB",
+                    color: "#037ef3",
+                    paddingBottom: "6px",
                   }}
                 >
                   View All Experiences
@@ -138,31 +164,15 @@ export default function Experiences() {
                 </Link>
               </motion.div>
             </div>
-            
-            {/* Heading */}
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              style={{ 
-                fontSize: "clamp(38px, 4.5vw, 56px)",
-                fontWeight: 800,
-                lineHeight: 1.1,
-                letterSpacing: "-0.02em",
-                maxWidth: "880px",
-                color: "#0F172A"
-              }}
-            >
-              Experiences That Matter
-            </motion.h2>
           </div>
 
           {/* Editorial Story Rail - Horizontal Scroll */}
-          <div 
+          <div
             className="overflow-x-auto pb-8 -mx-6 px-6"
-            style={{ 
+            style={{
               scrollbarWidth: "none",
-              msOverflowStyle: "none"
+              msOverflowStyle: "none",
+              marginTop: "32px",
             }}
           >
             <style jsx>{`
@@ -170,8 +180,8 @@ export default function Experiences() {
                 display: none;
               }
             `}</style>
-            <div 
-              style={{ 
+            <div
+              style={{
                 display: "grid",
                 gridAutoFlow: "column",
                 gridAutoColumns: "minmax(320px, 380px)",
@@ -183,8 +193,8 @@ export default function Experiences() {
                   key={experience.id}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     delay: 0.1 * index,
                     ease: [0.22, 1, 0.36, 1]
                   }}
@@ -193,21 +203,18 @@ export default function Experiences() {
                   whileHover={{ y: -8 }}
                 >
                   {/* Card */}
-                  <div 
-                    style={{ 
-                      ...glassCardStyle, 
-                      padding: "0",
-                      overflow: "hidden",
-                      transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
-                    }}
+                  <div
+                    style={experienceCardStyle}
+                    className="relative group-hover:shadow-2xl transition-all duration-300"
                   >
-                    {/* Portrait Image - Full width at top */}
-                    <div 
-                      style={{ 
+                    {/* Portrait Image - Rounded for Inset Look */}
+                    <div
+                      style={{
                         position: "relative",
                         width: "100%",
-                        height: "220px",
-                        overflow: "hidden"
+                        height: "240px",
+                        overflow: "hidden",
+                        borderRadius: "16px", // Rounded corners for inset image
                       }}
                     >
                       <img
@@ -221,8 +228,16 @@ export default function Experiences() {
                           objectPosition: "center top"
                         }}
                       />
+                      {/* Gradient Overlay for text contrast if needed, or just aesthetic */}
+                      <div
+                        className="absolute inset-x-0 bottom-0 h-24"
+                        style={{
+                          background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%)",
+                        }}
+                      />
+
                       {/* Country Pill - overlapping image bottom */}
-                      <span 
+                      <span
                         style={{
                           position: "absolute",
                           bottom: "12px",
@@ -231,10 +246,10 @@ export default function Experiences() {
                           borderRadius: "999px",
                           fontSize: "12px",
                           fontWeight: 600,
-                          background: "rgba(255, 255, 255, 0.9)",
-                          color: "#2563EB",
+                          background: "rgba(255, 255, 255, 0.95)",
+                          color: "#0F172A",
                           backdropFilter: "blur(8px)",
-                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
+                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
                         }}
                       >
                         {experience.country}
@@ -242,58 +257,62 @@ export default function Experiences() {
                     </div>
 
                     {/* Content */}
-                    <div style={{ padding: "24px" }}>
+                    <div style={{ paddingTop: "24px" }}>
                       {/* Name */}
-                      <h3 
-                        style={{ 
-                          fontSize: "20px",
-                          fontWeight: 700,
-                          color: "#0F172A",
-                          marginBottom: "4px"
+                      <h3
+                        style={{
+                          fontSize: "22px",
+                          fontWeight: 800,
+                          color: "#1e293b", // Slate 800
+                          marginBottom: "4px",
+                          letterSpacing: "-0.01em"
                         }}
                       >
                         {experience.name}
                       </h3>
 
                       {/* Project Name */}
-                      <p 
-                        style={{ 
+                      <p
+                        style={{
                           fontSize: "14px",
                           fontWeight: 600,
-                          color: "#2563EB",
-                          marginBottom: "14px"
+                          color: "#037ef3", // GAPLS Blue
+                          marginBottom: "16px",
+                          letterSpacing: "0.02em",
+                          textTransform: "uppercase"
                         }}
                       >
                         {experience.project}
                       </p>
 
                       {/* Story Snippet - Editorial style */}
-                      <p 
+                      <p
                         className="line-clamp-3"
-                        style={{ 
+                        style={{
                           fontSize: "15px",
-                          lineHeight: 1.65,
-                          color: "rgba(15, 23, 42, 0.8)",
-                          marginBottom: "18px"
+                          lineHeight: 1.7,
+                          color: "#475569", // Slate 600
+                          marginBottom: "24px"
                         }}
                       >
                         {experience.brief}
                       </p>
 
-                      {/* CTA: Read Story */}
-                      <span 
-                        className="inline-flex items-center gap-1.5 group-hover:gap-2 transition-all duration-300"
+                      {/* CTA: Read Story - Distinct Pill Button */}
+                      <span
+                        className="inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300 relative overflow-hidden"
                         style={{
                           fontSize: "14px",
                           fontWeight: 600,
-                          color: "#2563EB"
+                          color: "#037ef3",
+                          padding: "10px 20px",
+                          background: "rgba(3, 126, 243, 0.08)",
+                          borderRadius: "99px",
+                          width: "fit-content"
                         }}
                       >
                         Read Story
-                        <ArrowRight 
-                          size={14} 
-                          className="transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#38BDF8]" 
-                        />
+                        <ArrowRight size={16} className="relative z-10" />
                       </span>
                     </div>
                   </div>
@@ -305,11 +324,11 @@ export default function Experiences() {
       </div>
 
       {/* Thin gradient glow divider - transition to next section */}
-      <div 
-        style={{ 
+      <div
+        style={{
           height: "1px",
-          background: "linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent)" 
-        }} 
+          background: "linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent)"
+        }}
       />
 
       {/* Experience Modal */}
@@ -320,8 +339,11 @@ export default function Experiences() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedExperience(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(8px)" }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+            style={{
+              background: "rgba(15, 23, 42, 0.75)",
+              backdropFilter: "blur(16px)",
+            }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -329,142 +351,198 @@ export default function Experiences() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
               style={{
-                background: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(20px)",
-                borderRadius: "28px",
-                boxShadow: "0 40px 100px rgba(0, 0, 0, 0.25)"
+                background: "#ffffff",
+                borderRadius: "24px",
+                boxShadow: "0 50px 120px rgba(0, 0, 0, 0.3)",
               }}
             >
-              {/* Modal Header */}
-              <div 
-                className="relative text-center"
-                style={{ 
-                  background: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
-                  padding: "48px 32px"
+              {/* Close Button - Inside the card */}
+              <button
+                onClick={() => setSelectedExperience(null)}
+                className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20 group"
+                style={{
+                  background: "#f1f5f9",
+                  border: "1px solid #e2e8f0",
                 }}
               >
-                <button
-                  onClick={() => setSelectedExperience(null)}
-                  className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  style={{ 
-                    background: "rgba(255, 255, 255, 0.15)",
-                    backdropFilter: "blur(8px)"
-                  }}
-                >
-                  <X size={20} style={{ color: "white" }} />
-                </button>
+                <X size={18} className="text-slate-500 transition-transform group-hover:rotate-90 group-hover:text-slate-800" />
+              </button>
 
-                {/* Avatar */}
-                <div className="relative inline-block mb-5">
-                  <img
-                    src={selectedExperience.image}
-                    alt={selectedExperience.name}
-                    style={{
-                      width: "96px",
-                      height: "96px",
-                      borderRadius: "50%",
-                      border: "4px solid rgba(255, 255, 255, 0.3)",
-                      boxShadow: "0 16px 40px rgba(0, 0, 0, 0.3)",
-                      objectFit: "cover"
-                    }}
-                  />
+              {/* Content with generous padding */}
+              <div style={{ padding: "clamp(40px, 5vw, 56px) clamp(36px, 4.5vw, 52px)" }}>
+
+                {/* Profile Header */}
+                <div className="flex items-center gap-5" style={{ marginBottom: "32px", paddingBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                  <div className="shrink-0">
+                    <img
+                      src={selectedExperience.image}
+                      alt={selectedExperience.name}
+                      className="w-20 h-20 rounded-full object-cover ring-2 ring-slate-100"
+                    />
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {selectedExperience.name}
+                    </h3>
+                    <p style={{ fontSize: "15px", color: "#037ef3", fontWeight: 600 }}>
+                      {selectedExperience.country} • {selectedExperience.project}
+                    </p>
+                  </div>
                 </div>
 
-                <h3 
-                  style={{ 
-                    fontSize: "24px",
-                    fontWeight: 800,
-                    color: "white",
-                    marginBottom: "8px"
-                  }}
-                >
-                  {selectedExperience.name}
-                </h3>
-                <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "15px" }}>
-                  {selectedExperience.country} • {selectedExperience.project}
-                </p>
-              </div>
-
-              {/* Modal Content */}
-              <div style={{ padding: "32px" }}>
-                {/* Quote icon */}
-                <div className="relative mb-6">
-                  <Quote 
-                    size={36} 
-                    style={{ 
-                      position: "absolute",
-                      top: "-8px",
-                      left: "-4px",
-                      color: "rgba(37, 99, 235, 0.15)"
-                    }} 
-                  />
-                  <p 
-                    style={{ 
-                      fontSize: "17px",
-                      lineHeight: 1.8,
-                      color: "rgba(15, 23, 42, 0.85)",
-                      paddingLeft: "24px"
+                {/* THEIR STORY Section */}
+                <div style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                  <h4
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 800,
+                      color: "#0f172a",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    Their Story
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      lineHeight: 1.9,
+                      color: "#374151",
                     }}
                   >
                     {selectedExperience.fullStory}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div 
-                    style={{ 
-                      background: "rgba(37, 99, 235, 0.08)",
-                      borderRadius: "16px",
-                      padding: "18px",
-                      textAlign: "center"
-                    }}
-                  >
-                    <p style={{ fontSize: "12px", color: "rgba(15,23,42,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" }}>
-                      Duration
+                {/* PROJECT & COUNTRY Section */}
+                <div className="grid grid-cols-2 gap-8" style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      Project
+                    </h4>
+                    <p className="text-[15px] text-slate-600 font-medium">
+                      {selectedExperience.project}
                     </p>
-                    <p style={{ color: "#0F172A", fontWeight: 600 }}>
+                  </div>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      Country
+                    </h4>
+                    <p className="text-[15px] text-slate-600 font-medium">
+                      {selectedExperience.country}
+                    </p>
+                  </div>
+                </div>
+
+                {/* DURATION & YEAR Section */}
+                <div className="grid grid-cols-2 gap-8" style={{ paddingBottom: "32px", marginBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      Duration
+                    </h4>
+                    <p className="text-[15px] text-slate-600 font-medium">
                       {selectedExperience.duration}
                     </p>
                   </div>
-                  <div 
-                    style={{ 
-                      background: "rgba(37, 99, 235, 0.08)",
-                      borderRadius: "16px",
-                      padding: "18px",
-                      textAlign: "center"
-                    }}
-                  >
-                    <p style={{ fontSize: "12px", color: "rgba(15,23,42,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" }}>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 800,
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "12px",
+                      }}
+                    >
                       Year
-                    </p>
-                    <p style={{ color: "#0F172A", fontWeight: 600 }}>
+                    </h4>
+                    <p className="text-[15px] text-slate-600 font-medium">
                       {selectedExperience.year}
                     </p>
                   </div>
                 </div>
 
+                {/* Read More Stories Button */}
                 <Link
                   href="/experiences"
-                  className="w-full flex items-center justify-center gap-2 transition-all duration-300 hover:gap-3"
+                  className="relative w-full overflow-hidden rounded-xl transition-all duration-300 group/btn flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
                   style={{
-                    padding: "16px 32px",
-                    background: "#2563EB",
-                    color: "white",
-                    borderRadius: "14px",
-                    fontWeight: 600,
-                    fontSize: "16px"
+                    padding: "18px 32px",
+                    background: "linear-gradient(135deg, #037ef3 0%, #00d4ff 100%)",
                   }}
                 >
-                  Read More Stories
-                  <ArrowUpRight size={18} />
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover/btn:opacity-100"
+                    animate={{
+                      backgroundPosition: ["0% 0%", "200% 0%"],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    style={{
+                      background: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
+                      backgroundSize: "200% 100%",
+                    }}
+                  />
+                  <span
+                    className="relative z-10 flex items-center justify-center gap-2 font-bold text-white tracking-wide"
+                    style={{ fontSize: "16px" }}
+                  >
+                    Read More Stories
+                    <ArrowUpRight
+                      size={20}
+                      className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+                    />
+                  </span>
                 </Link>
+
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </section >
   );
 }

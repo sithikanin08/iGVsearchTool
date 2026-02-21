@@ -34,11 +34,10 @@ export default function Navbar() {
         className="fixed left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[1000px] top-5 sm:top-6"
       >
         <div
-          className={`relative backdrop-blur-2xl border border-white/50 rounded-[42px] flex items-center justify-between transition-all duration-300 overflow-hidden ${
-            isScrolled 
-              ? "bg-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]" 
-              : "bg-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)]"
-          }`}
+          className={`relative backdrop-blur-2xl border border-white/50 rounded-[42px] flex items-center justify-between transition-all duration-300 overflow-hidden ${isScrolled
+            ? "bg-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]"
+            : "bg-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)]"
+            }`}
           style={{
             WebkitBackdropFilter: "blur(24px) saturate(180%)",
             backdropFilter: "blur(24px) saturate(180%)",
@@ -49,7 +48,7 @@ export default function Navbar() {
           }}
         >
           {/* Subtle gradient overlay for depth */}
-          <div 
+          <div
             className="absolute inset-0 opacity-30 pointer-events-none"
             style={{
               background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%)",
@@ -74,7 +73,7 @@ export default function Navbar() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-[#234934] font-medium text-base hover:text-[#037ef3] transition-colors duration-200 whitespace-nowrap"
+                    className="text-[#1e293b] font-medium text-base hover:text-[#037ef3] transition-colors duration-200 whitespace-nowrap"
                   >
                     {item.name}
                   </Link>
@@ -86,7 +85,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="relative z-10 md:hidden p-2 text-[#234934] hover:bg-white/40 rounded-full transition-all duration-200 backdrop-blur-sm"
+            className="relative z-10 md:hidden p-2 text-[#1e293b] hover:bg-white/40 rounded-full transition-all duration-200 backdrop-blur-sm"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -104,15 +103,15 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="fixed top-28 left-1/2 -translate-x-1/2 z-40 w-[85%] max-w-[320px] md:hidden"
           >
-            <div 
+            <div
               className="relative bg-white/35 backdrop-blur-2xl border border-white/50 rounded-2xl p-5 shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] overflow-hidden"
-              style={{ 
+              style={{
                 WebkitBackdropFilter: "blur(24px) saturate(180%)",
                 backdropFilter: "blur(24px) saturate(180%)",
               }}
             >
               {/* Subtle gradient overlay */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-30 pointer-events-none"
                 style={{
                   background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%)",
@@ -129,7 +128,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-[#234934] font-medium hover:bg-white/50 rounded-xl transition-all duration-200 backdrop-blur-sm"
+                      className="block px-4 py-3 text-[#1e293b] font-medium hover:bg-white/50 rounded-xl transition-all duration-200 backdrop-blur-sm"
                     >
                       {item.name}
                     </Link>

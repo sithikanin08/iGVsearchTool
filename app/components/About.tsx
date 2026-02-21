@@ -47,13 +47,7 @@ const impactStats = [
   },
 ];
 
-// Feature pills content
-const featurePills = [
-  "Youth-led independent organization",
-  "Cross-cultural leadership development",
-  "SDG-driven initiatives",
-  "Global volunteer network",
-];
+
 
 // Stat card glass style (keeping for impact cards)
 const statCardGlassStyle = {
@@ -124,7 +118,7 @@ function FloatingParticles() {
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#234934"
+        color="#037ef3"
         size={0.2}
         sizeAttenuation={true}
         depthWrite={false}
@@ -279,7 +273,7 @@ const Stat3DCard = ({ stat, index, isInView }: Stat3DCardProps) => {
           style={{
             ...statCardGlassStyle,
             minHeight: "140px",
-            boxShadow: isHovered 
+            boxShadow: isHovered
               ? "0 20px 50px rgba(0, 0, 0, 0.12)"
               : "0 10px 35px rgba(0, 0, 0, 0.06)",
             display: "flex",
@@ -333,31 +327,21 @@ export default function About() {
       className="relative overflow-hidden"
       ref={ref}
     >
-      {/* Cinematic Gradient Divider */}
-      <div 
-        style={{ 
-          height: "1px",
-          marginTop: "16px",
-          marginBottom: "16px",
-          background: "linear-gradient(to right, transparent, rgba(59, 130, 246, 0.35), transparent)" 
-        }} 
-      />
-      
       {/* Main section with premium vertical spacing */}
       <div style={{ paddingTop: "40px", paddingBottom: "60px" }}>
-        
+
         {/* Soft atmospheric gradient background */}
-        <div 
-          className="absolute inset-0" 
-          style={{ 
-            background: "linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%)" 
-          }} 
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%)"
+          }}
         />
 
         {/* Depth Blob - soft blue gradient shape (required for depth) */}
         <motion.div
-          animate={{ 
-            x: [0, 15, 0], 
+          animate={{
+            x: [0, 15, 0],
             y: [0, -10, 0],
             scale: [1, 1.05, 1]
           }}
@@ -379,14 +363,14 @@ export default function About() {
         <AboutParticleBackground />
 
         {/* Main content container */}
-        <div 
+        <div
           className="relative z-10 w-full"
-          style={{ 
-            maxWidth: "1320px", 
-            marginLeft: "auto", 
+          style={{
+            maxWidth: "1280px",
+            marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "24px",
-            paddingRight: "24px"
+            paddingLeft: "clamp(40px, 8vw, 96px)",
+            paddingRight: "clamp(40px, 8vw, 96px)",
           }}
         >
           {/* Heading - Spans full width, creates visual drama */}
@@ -394,29 +378,29 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            style={{ marginBottom: "16px" }}
+            style={{ marginBottom: "8px" }}
           >
             {/* Label above heading */}
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              style={{ 
+              style={{
                 display: "block",
                 fontSize: "13px",
                 fontWeight: 600,
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 color: "#037ef3",
-                marginBottom: "16px"
+                marginBottom: "8px"
               }}
             >
               About AIESEC in SLIIT
             </motion.span>
 
             {/* Main Heading */}
-            <h2 
-              style={{ 
+            <h2
+              style={{
                 fontSize: "clamp(38px, 4vw, 54px)",
                 fontWeight: 800,
                 lineHeight: 1.1,
@@ -432,82 +416,94 @@ export default function About() {
             </h2>
           </motion.div>
 
+
+
           {/* Cinematic 2-Column Grid */}
-          <div 
+          <div
             className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-14 lg:gap-24 items-center"
-            style={{ marginTop: "48px" }}
+            style={{ marginTop: "24px" }}
           >
-            {/* Left Side - Floating Text (NO CARD) */}
+            {/* Left Side - Awards & Mini Story */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}
             >
-              {/* First Paragraph */}
-              <p 
-                style={{ 
+              {/* First Paragraph (Reverted to specific column) */}
+              <p
+                style={{
                   maxWidth: "640px",
                   fontSize: "17px",
                   lineHeight: 1.8,
                   color: "rgba(30, 41, 59, 0.85)",
-                  marginTop: "24px"
+                  marginBottom: "28px",
+                  textAlign: "justify"
                 }}
               >
-                AIESEC in SLIIT is a local committee of AIESEC Sri Lanka,
-                operating within the Sri Lanka Institute of Information Technology.
-                We are a youth-run, non-political, independent, not-for-profit
-                organization that provides young people with leadership development
-                and cross-cultural global experiences.
+                AIESEC in SLIIT was established in 2012. Since then, SLIIT has been
+                contributing to AIESEC’s vision by creating opportunities for the youth
+                to engage and get involved in global leadership experiences. Today,
+                AIESEC in SLIIT has 200+ active members working for Outgoing and Incoming
+                talent, Teacher, and Volunteer programs. AIESEC in SLIIT was awarded
+                with these at national conferences of AIESEC in Sri Lanka.
               </p>
 
-              {/* Feature Pills */}
-              <div style={{ marginTop: "28px", maxWidth: "620px" }}>
-                {featurePills.map((pill, index) => (
-                  <motion.span
-                    key={pill}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: 0.18 + index * 0.08, 
-                      ease: "easeOut" 
+              {/* Awards List */}
+              <div style={{ marginTop: "28px", maxWidth: "640px" }}>
+                {[
+                  "Most Progressive Entity Award in National Leadership Development Seminar 2025 (NLDS)",
+                  "Activating Leadership - Incoming Global Talent Award in National Leadership Development Seminar 2025 (NLDS)",
+                  "Acting Sustainably - Finance Award in Asia Pacific Leadership Summit 2025 (APLS) & National Leadership Development Seminar 2025 (NLDS)",
+                  "Activating Leadership - Outgoing Global Volunteer Award in National Leadership Development Seminar 2024 (NLDS)",
+                  "Most Progressive Expansion Award in National Planning Conference 2021"
+                ].map((award, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    whileHover={{
+                      y: -4,
+                      backgroundColor: "rgba(255, 255, 255, 0.9)",
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)"
                     }}
-                    style={pillStyle}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.18 + index * 0.1,
+                      ease: "easeOut"
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "12px",
+                      marginBottom: "16px",
+                      ...statCardGlassStyle,
+                      padding: "16px 20px",
+                      borderRadius: "16px",
+                      cursor: "default"
+                    }}
                   >
-                    <CheckCircle2 size={16} style={{ color: "#037ef3" }} />
-                    <span style={{ color: "#334155" }}>{pill}</span>
-                  </motion.span>
+                    <Award
+                      size={20}
+                      style={{
+                        color: "#037ef3",
+                        marginTop: "3px",
+                        flexShrink: 0
+                      }}
+                    />
+                    <span
+                      style={{
+                        color: "#334155",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        lineHeight: 1.5
+                      }}
+                    >
+                      {award}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
 
-              {/* Mini Story Block - Editorial Style */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.26, ease: "easeOut" }}
-                style={{
-                  marginTop: "36px",
-                  maxWidth: "560px",
-                  paddingLeft: "20px",
-                  borderLeft: "4px solid #037ef3"
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "18px",
-                    lineHeight: 1.7,
-                    fontWeight: 500,
-                    color: "rgba(15, 23, 42, 0.9)"
-                  }}
-                >
-                  Through our incoming Global Volunteer (iGV) program, we host
-                  international volunteers from around the world, connecting them
-                  with meaningful projects that address the United Nations Sustainable
-                  Development Goals (SDGs). Our diverse portfolio spans education, 
-                  environment, health, and social impact, creating lasting positive 
-                  change in Sri Lankan communities.
-                </p>
-              </motion.div>
             </motion.div>
 
             {/* Right Side - Floating Video Card */}
@@ -518,8 +514,8 @@ export default function About() {
               className="w-full flex justify-center lg:justify-end"
             >
               <motion.div
-                whileHover={{ 
-                  scale: 1.02, 
+                whileHover={{
+                  scale: 1.02,
                   y: -6,
                 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
@@ -591,6 +587,44 @@ export default function About() {
             </motion.div>
           </div>
 
+          {/* Bottom Full Width Section - iGV Program */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.26, ease: "easeOut" }}
+            style={{
+              marginTop: "60px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <div
+              style={{
+                maxWidth: "900px",
+                paddingLeft: "24px",
+                borderLeft: "4px solid #037ef3"
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "18px",
+                  lineHeight: 1.8,
+                  fontWeight: 500,
+                  color: "rgba(15, 23, 42, 0.9)",
+                  textAlign: "justify"
+                }}
+              >
+                Through our incoming Global Volunteer (iGV) program, we host
+                international volunteers from around the world, connecting them
+                with meaningful projects that address the United Nations Sustainable
+                Development Goals (SDGs). Our diverse portfolio spans education,
+                environment, health, and social impact, creating lasting positive
+                change in Sri Lankan communities.
+              </p>
+            </div>
+          </motion.div>
+
           {/* Impact Section with premium spacing */}
           <div style={{ marginTop: "80px", width: "100%" }}>
             <motion.div
@@ -599,9 +633,9 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.3 }}
               style={{ textAlign: "center", marginBottom: "32px", width: "100%" }}
             >
-              <h3 
+              <h3
                 className="font-bold"
-                style={{ 
+                style={{
                   fontSize: "clamp(24px, 3vw, 28px)",
                   color: "#1e293b",
                   textAlign: "center"
