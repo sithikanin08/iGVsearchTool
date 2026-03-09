@@ -101,8 +101,8 @@ export default function Experiences() {
             maxWidth: "1280px",
             marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "clamp(40px, 8vw, 96px)",
-            paddingRight: "clamp(40px, 8vw, 96px)",
+            paddingLeft: "clamp(20px, 6vw, 96px)",
+            paddingRight: "clamp(20px, 6vw, 96px)",
           }}
         >
           {/* Section Header */}
@@ -126,13 +126,13 @@ export default function Experiences() {
             </motion.span>
 
             {/* Heading + View All row */}
-            <div className="flex items-end justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
               <motion.h2
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 style={{
-                  fontSize: "clamp(38px, 4.5vw, 56px)",
+                  fontSize: "clamp(28px, 4.5vw, 56px)",
                   fontWeight: 800,
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",

@@ -2,187 +2,519 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, Linkedin, Briefcase } from "lucide-react";
+import { Briefcase, Linkedin, Phone, Mail } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HeroParticleBackground from "../components/HeroParticleBackground";
+import SectionParticleBackground from "../components/SectionParticleBackground";
 
 /* ───────────────────────────────────────────────────────────────
-   TEAM DATA STRUCTURE
+   DATA
    ─────────────────────────────────────────────────────────────── */
 interface TeamMember {
   name: string;
   role: string;
   image: string;
+  email?: string;
+  linkedin?: string;
+  phone?: string;
 }
 
-const b2bTeam: { lcvp: TeamMember; specialist: TeamMember; leaders: TeamMember[] } = {
-  lcvp: { name: "Sabuleer Rashaad", role: "LCVP B2B", image: "https://ui-avatars.com/api/?name=Sabuleer+Rashaad&background=0f172a&color=fff&size=200" },
-  specialist: { name: "Risni De Mel", role: "B2B Specialist", image: "https://ui-avatars.com/api/?name=Risni+De+Mel&background=0f172a&color=fff&size=200" },
-  leaders: [
-    { name: "Sithika Ninduwara", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Sithika+Ninduwara&background=0f172a&color=fff&size=200" },
-    { name: "Suprajan Jaypal", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Suprajan+Jaypal&background=0f172a&color=fff&size=200" },
-    { name: "Dahamya", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Dahamya&background=0f172a&color=fff&size=200" },
-    { name: "Rageeshan", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Rageeshan&background=0f172a&color=fff&size=200" },
-    { name: "Yasiru", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Yasiru&background=0f172a&color=fff&size=200" },
+const avatar = (name: string) =>
+  `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=fff&size=200`;
+
+/* ── B2B ── */
+const b2b = {
+  lcvp: { name: "Sabeelur Rashaad", role: "LCVP B2B", image: "/rashaadDP.png", email: "srashaad@aiesec.net", linkedin: "https://www.linkedin.com/in/sabeelurrashaad/", phone: "+94 77 422 6876" },
+  level2: [
+    { name: "Risni De Mel", role: "Specialist", image: "/risinidemelDP.png" },
+    { name: "Sithika Ninduwara", role: "Team Leader", image: "/sithikaDP.png" },
+    { name: "Suprajan Jeyapal", role: "Team Leader", image: "/suprajan.png" },
+    { name: "Dahamya Kulnadi", role: "Team Leader", image: "/dahamyaDP.png" },
+    { name: "Rageeshan Chandrasegaran", role: "Team Leader", image: "/rageeshanDP.png" },
+    { name: "Harshitha Yasiru", role: "Team Leader", image: "/yasiruDP.png" },
   ],
 };
 
-const irAndMTeam = {
-  lcvp: { name: "Dinidi Senanayake", role: "LCVP IR & Matching", image: "https://ui-avatars.com/api/?name=Dinidi+Senanayake&background=0f172a&color=fff&size=200" },
+/* ── CXP ── */
+const cxp = {
+  lcvp: { name: "Savinda Sithum", role: "LCVP CXP", image: "/savindaDP.png", email: "savindasithum45@aiesec.net", linkedin: "https://www.linkedin.com/in/savinda-sithum-bb938a354/", phone: "+94 76 546 0938" },
+  manager: { name: "Yeshan KP", role: "CXP Manager", image: "/yeshanDP.png" },
+  coordinator: { name: "Ashen Geeth", role: "Campaign Coordinator", image: "/ashenDP.png" },
+  teamLeaders: [
+    { name: "Anuda Ranasinghe", role: "Team Leader", image: "/anudaDP.png" },
+    { name: "Shanil", role: "Team Leader", image: "/shanilDP.png" },
+    { name: "Malith Samaradivakara", role: "Team Leader", image: "/malithDp.png" },
+    { name: "Ashan", role: "Team Leader", image: "/ashanDP.png" },
+  ],
+};
+
+/* ── IR & Matching ── */
+const irm = {
+  lcvp: { name: "Dinidi Senanayake", role: "LCVP IR & Matching", image: "/dinidiDP%20(1).png", email: "dinidisenanayake@aiesec.net", linkedin: "http://www.linkedin.com/in/dinidi-senanayake", phone: "+94 76 638 8408" },
   ir: {
-    manager: { name: "Kavini", role: "IR Manager", image: "https://ui-avatars.com/api/?name=Kavini&background=0f172a&color=fff&size=200" },
-    coordinator: { name: "Yohan", role: "Campaign Coordinator", image: "https://ui-avatars.com/api/?name=Yohan&background=0f172a&color=fff&size=200" },
+    manager: { name: "Kavini Wijesiriwardena", role: "IR Manager", image: "/kaviniDP.png" },
+    coordinator: { name: "Yohan Wickramasinghe", role: "Campaign Coordinator", image: "/YohanDP.png" },
     leaders: [
-      { name: "Vindhi Akmeemana", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Vindhi+Akmeemana&background=0f172a&color=fff&size=200" },
-      { name: "Nawoda Weerasiri", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Nawoda+Weerasiri&background=0f172a&color=fff&size=200" },
-      { name: "Binadi", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Binadi&background=0f172a&color=fff&size=200" },
+      { name: "Vindhi Akmeemana", role: "Team Leader", image: "/vindhiDP.png" },
+      { name: "Nawoda Weerasiri", role: "Team Leader", image: "/nawodaDP.png" },
+      { name: "Binadi Hettiarachchi", role: "Team Leader", image: "/Binadi.png" },
     ],
   },
   matching: {
-    manager: { name: "Monali", role: "Matching Manager", image: "https://ui-avatars.com/api/?name=Monali&background=0f172a&color=fff&size=200" },
+    manager: { name: "Monali Edirisinghe", role: "Matching Manager", image: "/monaliDP.png" },
+    coordinator: { name: "Hashini vijerathne", role: "Matching Coordinator", image: "/hashiniDP.png" },
     leaders: [
-      { name: "Birtney", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Birtney&background=0f172a&color=fff&size=200" },
-      { name: "Mahady", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Mahady&background=0f172a&color=fff&size=200" },
-      { name: "Methmi", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Methmi&background=0f172a&color=fff&size=200" },
+      { name: "Birtney Godwin", role: "Team Leader", image: "/britDP.png" },
+      { name: "Mahady Hassan", role: "Team Leader", image: "/mahadyDP.png" },
+      { name: "Methmi Liyanage", role: "Team Leader", image: "/methmiDP.png" },
     ],
-  }
-};
-
-const cxpTeam = {
-  lcvp: { name: "Savinda", role: "LCVP CXP", image: "https://ui-avatars.com/api/?name=Savinda&background=0f172a&color=fff&size=200" },
-  manager: { name: "Yeshan", role: "CXP Manager", image: "https://ui-avatars.com/api/?name=Yeshan&background=0f172a&color=fff&size=200" },
-  coordinator: { name: "Ashen", role: "Campaign Coordinator", image: "https://ui-avatars.com/api/?name=Ashen&background=0f172a&color=fff&size=200" },
-  leaders: [
-    { name: "Anuda", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Anuda&background=0f172a&color=fff&size=200" },
-    { name: "Shanil", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Shanil&background=0f172a&color=fff&size=200" },
-    { name: "Malith", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Malith&background=0f172a&color=fff&size=200" },
-    { name: "Ashan", role: "Team Leader", image: "https://ui-avatars.com/api/?name=Ashan&background=0f172a&color=fff&size=200" },
-  ],
+  },
 };
 
 /* ───────────────────────────────────────────────────────────────
-   Reusable Member Card Component
+   CARD COMPONENTS
    ─────────────────────────────────────────────────────────────── */
-function MemberCard({ member, highlight = false, size = "normal" }: { member: TeamMember, highlight?: boolean, size?: "large" | "normal" | "small" }) {
-  const cardScale = size === "large" ? "w-[280px]" : size === "small" ? "w-[180px]" : "w-[220px]";
-  const cardPadding = size === "large" ? "p-8" : size === "small" ? "p-5" : "p-7";
-  const imgScale = size === "large" ? "w-[128px] h-[128px]" : size === "small" ? "w-[80px] h-[80px]" : "w-[100px] h-[100px]";
-  const imgMargin = size === "large" ? "mb-6" : size === "small" ? "mb-3" : "mb-5";
-  const titleSize = size === "large" ? "text-[22px]" : size === "small" ? "text-[15px]" : "text-[18px]";
-  const roleSize = size === "small" ? "text-[11px]" : "text-[13px]";
 
+function PersonCard({ member, highlight = false }: { member: TeamMember; highlight?: boolean }) {
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
-      className={`relative flex flex-col items-center ${cardPadding} bg-white rounded-[24px] cursor-pointer group ${cardScale}`}
+      whileHover={{ y: -4, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{
+        width: highlight ? "min(240px, 100%)" : "min(200px, 100%)",
+        padding: highlight ? "28px 20px" : "20px 16px",
+        background: "white",
+        borderRadius: "20px",
         boxShadow: highlight
-          ? "0 20px 60px rgba(3,126,243,0.15), inset 0 0 0 2px rgba(3,126,243,0.1)"
-          : "0 10px 40px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(0,0,0,0.05)",
-        transition: "box-shadow 0.3s ease",
+          ? "0 8px 32px rgba(3,126,243,0.12), inset 0 0 0 1.5px rgba(3,126,243,0.15)"
+          : "0 4px 20px rgba(15,23,42,0.05), inset 0 0 0 1px rgba(15,23,42,0.06)",
+        display: "flex",
+        flexDirection: "column" as const,
+        alignItems: "center",
+        gap: highlight ? "12px" : "8px",
+        cursor: "default",
+        flexShrink: 0,
       }}
     >
-      {/* Accent glow on hover */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 rounded-[24px] transition-opacity duration-300"
-        style={{ background: "radial-gradient(circle at 50% 0%, rgba(3,126,243,0.08) 0%, transparent 70%)" }}
-      />
-
-      <div className={`relative mb-5 ${imgScale}`}>
+      {/* Avatar */}
+      <div style={{ position: "relative", width: highlight ? "88px" : "72px", height: highlight ? "88px" : "72px" }}>
         <img
           src={member.image}
           alt={member.name}
-          className="w-full h-full rounded-full object-cover ring-4 ring-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            objectFit: "cover",
+            objectPosition: "center 20%",
+            border: highlight ? "3px solid rgba(3,126,243,0.2)" : "2px solid rgba(226,232,240,0.8)",
+          }}
         />
         {highlight && (
-          <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-tr from-[#037ef3] to-[#00d4ff] flex items-center justify-center border-[3px] border-white shadow-lg text-white">
-            <Briefcase size={14} />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-2px",
+              right: "-2px",
+              width: "26px",
+              height: "26px",
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #037ef3, #00d4ff)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "2px solid white",
+              boxShadow: "0 2px 8px rgba(3,126,243,0.3)",
+            }}
+          >
+            <Briefcase size={11} color="white" />
           </div>
         )}
       </div>
 
-      <h3 className={`font-black text-[#0f172a] text-center leading-tight mb-1.5 ${titleSize} tracking-tight`}>
+      {/* Name */}
+      <p
+        style={{
+          fontSize: highlight ? "15px" : "14px",
+          fontWeight: 600,
+          color: "#0f172a",
+          textAlign: "center",
+          lineHeight: 1.3,
+          margin: 0,
+        }}
+      >
         {member.name}
-      </h3>
-      <p className="text-[13px] font-bold text-[#037ef3] uppercase tracking-wider text-center mb-4">
+      </p>
+
+      {/* Role */}
+      <p
+        style={{
+          fontSize: "11px",
+          fontWeight: 700,
+          color: "#037ef3",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          textAlign: "center",
+          margin: 0,
+        }}
+      >
         {member.role}
       </p>
 
-      {/* Social Links on Hover */}
-      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-        <div className="w-8 h-8 rounded-full bg-[#f1f5f9] flex items-center justify-center text-[#64748b] hover:text-[#037ef3] hover:bg-[#e0e7ff] transition-colors">
-          <Linkedin size={14} />
+      {/* LinkedIn & Phone icons — LCVP cards only */}
+      {highlight && (
+        <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                background: "rgba(3,126,243,0.06)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#037ef3",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#037ef3";
+                e.currentTarget.style.color = "white";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(3,126,243,0.06)";
+                e.currentTarget.style.color = "#037ef3";
+              }}
+            >
+              <Linkedin size={14} />
+            </a>
+          )}
+          {member.phone && (
+            <a
+              href={`tel:${member.phone.replace(/\s/g, "")}`}
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                background: "rgba(3,126,243,0.06)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#037ef3",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#037ef3";
+                e.currentTarget.style.color = "white";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(3,126,243,0.06)";
+                e.currentTarget.style.color = "#037ef3";
+              }}
+            >
+              <Phone size={14} />
+            </a>
+          )}
+          {member.email && (
+            <a
+              href={`mailto:${member.email}`}
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                background: "rgba(3,126,243,0.06)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#037ef3",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#037ef3";
+                e.currentTarget.style.color = "white";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(3,126,243,0.06)";
+                e.currentTarget.style.color = "#037ef3";
+              }}
+            >
+              <Mail size={14} />
+            </a>
+          )}
         </div>
-        <div className="w-8 h-8 rounded-full bg-[#f1f5f9] flex items-center justify-center text-[#64748b] hover:text-[#0a1628] hover:bg-[#e2e8f0] transition-colors">
-          <Mail size={14} />
-        </div>
-      </div>
+      )}
     </motion.div>
   );
 }
+
+/* Connector line from parent to children */
+function VerticalConnector() {
+  return (
+    <div
+      style={{
+        width: "2px",
+        height: "32px",
+        background: "linear-gradient(to bottom, rgba(3,126,243,0.3), rgba(3,126,243,0.08))",
+        margin: "0 auto",
+        borderRadius: "1px",
+      }}
+    />
+  );
+}
+
+/* Thin horizontal bracket for grouping */
+function HorizontalBracket() {
+  return (
+    <div
+      style={{
+        height: "2px",
+        width: "60%",
+        maxWidth: "400px",
+        background: "linear-gradient(90deg, transparent, rgba(3,126,243,0.15), transparent)",
+        margin: "0 auto",
+      }}
+    />
+  );
+}
+
+/* Level label badge */
+function LevelBadge({ text }: { text: string }) {
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "4px 14px",
+        borderRadius: "20px",
+        background: "rgba(3,126,243,0.06)",
+        border: "1px solid rgba(3,126,243,0.1)",
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "#037ef3",
+        textTransform: "uppercase",
+        letterSpacing: "0.12em",
+        margin: "0 auto",
+      }}
+    >
+      {text}
+    </div>
+  );
+}
+
+/* Centered row of cards */
+function CardRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignContent: "center",
+        gap: "24px",
+        width: "100%",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ───────────────────────────────────────────────────────────────
+   SECTION COMPONENT
+   ─────────────────────────────────────────────────────────────── */
+
+function DepartmentSection({
+  title,
+  highlight,
+  subtitle,
+  children,
+  delay = 0,
+}: {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+
+  return (
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay }}
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      {/* Section Header */}
+      <div style={{ textAlign: "center", marginBottom: "48px" }}>
+        <h2
+          style={{
+            fontSize: "clamp(28px, 3.5vw, 42px)",
+            fontWeight: 800,
+            color: "#0f172a",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.15,
+            marginBottom: "12px",
+          }}
+        >
+          {title}{" "}
+          <span className="bg-gradient-to-r from-[#037ef3] to-[#00d4ff] bg-clip-text text-transparent">
+            {highlight}
+          </span>
+        </h2>
+        <p
+          style={{
+            fontSize: "16px",
+            lineHeight: 1.7,
+            color: "rgba(15,23,42,0.55)",
+            maxWidth: "520px",
+            margin: "0 auto",
+            fontWeight: 500,
+          }}
+        >
+          {subtitle}
+        </p>
+      </div>
+
+      {/* Hierarchy Content */}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "0",
+        }}
+      >
+        {children}
+      </div>
+    </motion.section>
+  );
+}
+
+/* ───────────────────────────────────────────────────────────────
+   BRANCH PANEL (for IR & Matching split)
+   ─────────────────────────────────────────────────────────────── */
+
+function BranchPanel({
+  title,
+  manager,
+  coordinator,
+  leaders,
+}: {
+  title: string;
+  manager: TeamMember;
+  coordinator: TeamMember;
+  leaders: TeamMember[];
+}) {
+  return (
+    <div
+      style={{
+        flex: "1 1 auto",
+        minWidth: "min(300px, 100%)",
+        maxWidth: "100%",
+        background: "rgba(255,255,255,0.5)",
+        backdropFilter: "blur(8px)",
+        border: "1px solid rgba(226,232,240,0.6)",
+        borderRadius: "24px",
+        padding: "32px 24px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "0",
+      }}
+    >
+      {/* Branch Title */}
+      <p
+        style={{
+          fontSize: "13px",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.15em",
+          color: "#037ef3",
+          marginBottom: "24px",
+        }}
+      >
+        {title}
+      </p>
+
+      {/* Manager + Coordinator */}
+      <CardRow>
+        <PersonCard member={manager} />
+        <PersonCard member={coordinator} />
+      </CardRow>
+
+      {/* Connector */}
+      <VerticalConnector />
+      <HorizontalBracket />
+      <div style={{ height: "8px" }} />
+
+      {/* Team Leaders */}
+      <CardRow>
+        {leaders.map((tl) => (
+          <PersonCard key={tl.name} member={tl} />
+        ))}
+      </CardRow>
+    </div>
+  );
+}
+
+/* ───────────────────────────────────────────────────────────────
+   MAIN PAGE
+   ─────────────────────────────────────────────────────────────── */
 
 export default function TeamPage() {
   const heroRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] overflow-hidden">
+    <main className="min-h-screen" style={{ background: "#f1f3e9", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ── Hero Section ──────────────────────────────── */}
-      <section ref={heroRef} className="relative overflow-hidden"
-        style={{
-          paddingTop: "140px",
-          paddingBottom: "80px",
-          backgroundColor: "#0F172A",
-        }}
+      {/* ── Hero ──────────────────────────────── */}
+      <section
+        ref={heroRef}
+        className="relative overflow-hidden"
+        style={{ paddingTop: "140px", paddingBottom: "80px", backgroundColor: "#0F172A" }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#1e293b_0%,#0f172a_100%)]" />
         <HeroParticleBackground />
 
-        <div className="relative z-10 flex flex-col items-center" style={{
-          maxWidth: "1280px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          paddingLeft: "clamp(24px, 6vw, 96px)",
-          paddingRight: "clamp(24px, 6vw, 96px)",
-          textAlign: "center",
-        }}>
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "inline-block",
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#00d4ff",
-              marginBottom: "16px",
-            }}
-          >
-            AIESEC in SLIIT
-          </motion.span>
-
+        <div
+          className="relative z-10 flex flex-col items-center text-center mx-auto"
+          style={{
+            maxWidth: "1280px",
+            paddingLeft: "clamp(24px, 6vw, 96px)",
+            paddingRight: "clamp(24px, 6vw, 96px)",
+          }}
+        >
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             style={{
-              fontSize: "clamp(48px, 6vw, 72px)",
-              fontWeight: 900,
+              fontSize: "clamp(40px, 5vw, 64px)",
+              fontWeight: 800,
               lineHeight: 1.1,
               letterSpacing: "-0.03em",
               color: "white",
               marginBottom: "24px",
-              textShadow: "0 10px 30px rgba(0,0,0,0.5)",
             }}
           >
-            Meet Our <br />
-            <span className="bg-gradient-to-r from-[#037ef3] via-[#00d4ff] to-[#037ef3] bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-              Leadership Team
+            Meet Our{" "}
+            <span className="bg-gradient-to-r from-[#037ef3] to-[#00d4ff] bg-clip-text text-transparent">
+              Leadership Body
             </span>
           </motion.h1>
 
@@ -191,148 +523,142 @@ export default function TeamPage() {
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             style={{
-              fontSize: "18px",
+              fontSize: "17px",
               lineHeight: 1.7,
-              color: "rgba(255,255,255,0.7)",
-              maxWidth: "600px",
+              color: "rgba(255,255,255,0.6)",
+              maxWidth: "560px",
             }}
           >
-            The dedicated core leadership driving impactful volunteering experiences and fostering global connections across Sri Lanka.
+            The dedicated core leadership driving impactful volunteering experiences and fostering
+            global connections across Sri Lanka.
           </motion.p>
         </div>
       </section>
 
-      {/* ── 4-Sided Page Margin Wrapper ──────────────────────────────── */}
-      <div className="mx-auto max-w-[1400px] my-16 px-4 sm:px-8 lg:px-12 flex flex-col gap-32">
+      {/* ── Content ──────────────────────────────── */}
+      <div className="relative">
+        <SectionParticleBackground intensity={0.1} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f1f3e9]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
 
-        {/* ── B2B Section ──────────────────────────────── */}
-        <section className="relative bg-white rounded-[40px] shadow-sm border border-slate-100 py-16 px-8">
-          <div className="container-custom relative z-10 w-full">
+        <div
+          className="relative z-10"
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "80px clamp(24px, 6vw, 96px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "80px",
+          }}
+        >
 
-            <div className="text-center mb-20 px-4">
-              <h2 className="text-3xl md:text-4xl font-black text-[#0f172a] tracking-tight mb-4">
-                Business to Business <span className="text-[#037ef3]">(B2B)</span>
-              </h2>
-              <p className="text-[#64748b] max-w-2xl mx-auto font-medium">
-                Driving corporate partnerships and strategic opportunities for our incoming global volunteers.
-              </p>
+          {/* ════════════════════════════════════════════
+             SECTION 1 — B2B
+             ════════════════════════════════════════════ */}
+          <DepartmentSection
+            title="Business to"
+            highlight="Business (B2B)"
+            subtitle="Driving corporate partnerships and strategic opportunities for our incoming global volunteers."
+          >
+            <CardRow>
+              <PersonCard member={b2b.lcvp} highlight />
+            </CardRow>
+
+            {/* Connector */}
+            <VerticalConnector />
+            <HorizontalBracket />
+            <div style={{ height: "8px" }} />
+
+            <CardRow>
+              {b2b.level2.map((m) => (
+                <PersonCard key={m.name} member={m} />
+              ))}
+            </CardRow>
+          </DepartmentSection>
+
+          {/* ════════════════════════════════════════════
+             SECTION 2 — IR & MATCHING
+             ════════════════════════════════════════════ */}
+          <DepartmentSection
+            title="International Relations"
+            highlight="& Matching"
+            subtitle="Bridging global networks and perfectly pairing eager volunteers with life-changing projects."
+            delay={0.1}
+          >
+            <CardRow>
+              <PersonCard member={irm.lcvp} highlight />
+            </CardRow>
+
+            {/* Connector */}
+            <VerticalConnector />
+            <HorizontalBracket />
+            <div style={{ height: "24px" }} />
+
+            {/* Level 2 + 3: Split into IR | Matching branches */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "24px",
+                width: "100%",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <BranchPanel
+                title="International Relations"
+                manager={irm.ir.manager}
+                coordinator={irm.ir.coordinator}
+                leaders={irm.ir.leaders}
+              />
+              <BranchPanel
+                title="Matching"
+                manager={irm.matching.manager}
+                coordinator={irm.matching.coordinator}
+                leaders={irm.matching.leaders}
+              />
             </div>
+          </DepartmentSection>
 
-            {/* Massively Increased Gaps */}
-            <div className="flex flex-col items-center gap-16 lg:gap-24">
-              <MemberCard member={b2bTeam.lcvp} highlight size="large" />
-              <MemberCard member={b2bTeam.specialist} />
+          {/* ════════════════════════════════════════════
+             SECTION 3 — CXP
+             ════════════════════════════════════════════ */}
+          <DepartmentSection
+            title="Customer"
+            highlight="Experience (CXP)"
+            subtitle="Ensuring seamless journeys and unforgettable experiences for every volunteer from arrival to departure."
+            delay={0.15}
+          >
+            <CardRow>
+              <PersonCard member={cxp.lcvp} highlight />
+            </CardRow>
 
-              {/* Increased margin-top for the TL Grid */}
-              <div className="flex flex-wrap justify-center gap-8 mt-8 lg:mt-12 w-full">
-                {b2bTeam.leaders.map(tl => (
-                  <MemberCard key={tl.name} member={tl} size="small" />
-                ))}
-              </div>
-            </div>
+            {/* Connector */}
+            <VerticalConnector />
+            <HorizontalBracket />
+            <div style={{ height: "8px" }} />
 
-          </div>
-        </section>
+            {/* Manager + Coordinator side by side */}
+            <CardRow>
+              <PersonCard member={cxp.manager} />
+              <PersonCard member={cxp.coordinator} />
+            </CardRow>
 
-        {/* ── COMBINED IR & MATCHING Section ──────────────────────────────── */}
-        <section className="relative bg-white rounded-[40px] shadow-sm border border-slate-100 py-20 px-4 sm:px-8 overflow-hidden">
+            {/* Connector from Manager to TLs */}
+            <VerticalConnector />
+            <HorizontalBracket />
+            <div style={{ height: "8px" }} />
 
-          {/* Subtle background abstract */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#f0f9ff] to-transparent rounded-full blur-3xl opacity-60 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-[#f8fafc] to-transparent rounded-full blur-3xl opacity-80 pointer-events-none" />
-
-          <div className="container-custom relative z-10">
-
-            <div className="text-center mb-24">
-              <h2 className="text-3xl md:text-4xl font-black text-[#0f172a] tracking-tight mb-4">
-                International Relations <span className="text-[#037ef3]">&amp;</span> Matching
-              </h2>
-              <p className="text-[#64748b] max-w-2xl mx-auto font-medium">
-                Bridging global networks and perfectly pairing eager volunteers with life-changing projects.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-16 lg:gap-24">
-
-              {/* SHARED LCVP */}
-              <div className="relative z-20">
-                <MemberCard member={irAndMTeam.lcvp} highlight size="large" />
-              </div>
-
-              {/* Split layout: IR on Left, M on Right. Gaps massively increased */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 w-full max-w-6xl relative z-10">
-
-                {/* IR Column */}
-                <div className="flex flex-col items-center bg-[#f8fafc] p-8 rounded-3xl border border-[#e2e8f0]">
-                  <h3 className="text-xl font-bold text-[#0f172a] mb-8 tracking-wide uppercase">Int. Relations (IR)</h3>
-                  <div className="flex flex-wrap justify-center gap-6 mb-8 w-full">
-                    <MemberCard member={irAndMTeam.ir.manager} />
-                    <MemberCard member={irAndMTeam.ir.coordinator} />
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-4 w-full">
-                    {irAndMTeam.ir.leaders.map(tl => (
-                      <MemberCard key={tl.name} member={tl} size="small" />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Matching Column */}
-                <div className="flex flex-col items-center bg-[#f8fafc] p-8 rounded-3xl border border-[#e2e8f0]">
-                  <h3 className="text-xl font-bold text-[#0f172a] mb-8 tracking-wide uppercase">Matching (M)</h3>
-                  <div className="flex flex-wrap justify-center gap-6 mb-16 w-full">
-                    {/* Matching only has one Manager, no coordinator array so we push mb-16 to align with IR height */}
-                    <MemberCard member={irAndMTeam.matching.manager} />
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-4 w-full h-full align-bottom">
-                    {irAndMTeam.matching.leaders.map(tl => (
-                      <MemberCard key={tl.name} member={tl} size="small" />
-                    ))}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── CXP Section ──────────────────────────────── */}
-        <section className="relative bg-white rounded-[40px] shadow-sm border border-slate-100 py-16 px-8">
-          <div className="container-custom relative z-10 w-full">
-
-            <div className="text-center mb-20 px-4">
-              <h2 className="text-3xl md:text-4xl font-black text-[#0f172a] tracking-tight mb-4">
-                Customer Experience <span className="text-[#037ef3]">(CXP)</span>
-              </h2>
-              <p className="text-[#64748b] max-w-2xl mx-auto font-medium">
-                Ensuring seamless journeys and unforgettable experiences for every volunteer from arrival to departure.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-16 lg:gap-24">
-              {/* LCVP */}
-              <MemberCard member={cxpTeam.lcvp} highlight size="large" />
-
-              {/* Manager & Coordinator Side-by-Side */}
-              <div className="flex flex-col items-center w-full">
-                <div className="flex flex-wrap justify-center gap-12 md:gap-24 w-full">
-                  <MemberCard member={cxpTeam.manager} />
-                  <MemberCard member={cxpTeam.coordinator} />
-                </div>
-              </div>
-
-              {/* TLs Grid */}
-              <div className="flex flex-wrap justify-center gap-8 lg:mt-8 w-full">
-                {cxpTeam.leaders.map(tl => (
-                  <MemberCard key={tl.name} member={tl} size="small" />
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-      </div> {/* <-- End of 4-Sided Page Margin Wrapper */}
+            {/* Team Leaders under Manager */}
+            <CardRow>
+              {cxp.teamLeaders.map((tl) => (
+                <PersonCard key={tl.name} member={tl} />
+              ))}
+            </CardRow>
+          </DepartmentSection>
+        </div>
+      </div>
 
       <Footer />
     </main>

@@ -31,42 +31,42 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[1000px] top-5 sm:top-6"
+        className="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[1000px] top-3 sm:top-6"
       >
+        {/* Main navbar pill */}
         <div
-          className={`relative backdrop-blur-2xl border border-white/50 rounded-[42px] flex items-center justify-between transition-all duration-300 overflow-hidden ${isScrolled
+          className={`relative backdrop-blur-2xl border border-white/50 rounded-full flex items-center justify-between transition-all duration-300 overflow-hidden ${isScrolled
             ? "bg-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]"
             : "bg-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)]"
             }`}
           style={{
             WebkitBackdropFilter: "blur(24px) saturate(180%)",
             backdropFilter: "blur(24px) saturate(180%)",
-            paddingLeft: "80px",
-            paddingRight: "80px",
+            paddingLeft: "clamp(12px, 4vw, 80px)",
+            paddingRight: "clamp(12px, 4vw, 80px)",
             paddingTop: "6px",
             paddingBottom: "6px",
           }}
         >
-          {/* Subtle gradient overlay for depth */}
           <div
             className="absolute inset-0 opacity-30 pointer-events-none"
             style={{
               background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%)",
             }}
           />
-          {/* Logo - Far Left */}
+          {/* Logo */}
           <Link href="/" className="relative z-10 flex items-center shrink-0">
             <Image
               src="/aiesec in sliit - blue.png"
               alt="AIESEC in SLIIT"
               width={220}
               height={60}
-              className="h-14 w-auto object-contain"
+              className="h-8 sm:h-14 w-auto object-contain"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation Links - Right Side */}
+          {/* Desktop Navigation Links */}
           <nav className="relative z-10 hidden md:block">
             <ul className="flex items-center gap-8">
               {navItems.map((item) => (
@@ -85,62 +85,49 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="relative z-10 md:hidden p-2 text-[#1e293b] hover:bg-white/40 rounded-full transition-all duration-200 backdrop-blur-sm"
+            className="relative z-10 md:hidden w-9 h-9 flex items-center justify-center text-[#1e293b] hover:bg-white/40 rounded-full transition-all duration-200"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+
+        {/* ── Mobile Dropdown (slides down below navbar) ── */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="md:hidden overflow-hidden mt-2"
+            >
+              <div
+                className="backdrop-blur-2xl border border-white/50 rounded-2xl py-4 px-4"
+                style={{
+                  background: "rgba(255,255,255,0.35)",
+                  WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                  backdropFilter: "blur(24px) saturate(180%)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
+                }}
+              >
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-5 py-4 text-[#1e293b] font-medium text-[15px] text-center rounded-xl hover:bg-white/50 transition-colors duration-150"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-28 left-1/2 -translate-x-1/2 z-40 w-[85%] max-w-[320px] md:hidden"
-          >
-            <div
-              className="relative bg-white/35 backdrop-blur-2xl border border-white/50 rounded-2xl p-5 shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] overflow-hidden"
-              style={{
-                WebkitBackdropFilter: "blur(24px) saturate(180%)",
-                backdropFilter: "blur(24px) saturate(180%)",
-              }}
-            >
-              {/* Subtle gradient overlay */}
-              <div
-                className="absolute inset-0 opacity-30 pointer-events-none"
-                style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%)",
-                }}
-              />
-              <ul className="relative z-10 flex flex-col gap-1">
-                {navItems.map((item, index) => (
-                  <motion.li
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-[#1e293b] font-medium hover:bg-white/50 rounded-xl transition-all duration-200 backdrop-blur-sm"
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Overlay for mobile menu */}
+      {/* Overlay to close menu when tapping outside */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -148,7 +135,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+            className="fixed inset-0 z-40 md:hidden"
           />
         )}
       </AnimatePresence>

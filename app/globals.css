@@ -356,7 +356,7 @@ body {
 
 /* Section Styles */
 .section-padding {
-  padding: 80px 16px;
+  padding: 80px 20px;
 }
 
 @media (min-width: 768px) {
@@ -394,12 +394,22 @@ body {
   animation: sparkle 2s ease-in-out infinite;
 }
 
+/* Cyberpunk Shimmer Sweep */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* Responsive Container */
 .container-custom {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
 }
 
 @media (min-width: 640px) {
@@ -461,4 +471,18 @@ body {
 
 .marquee:hover {
   animation-play-state: paused;
+}
+
+/* ── Mobile Responsiveness ─────────────────────────── */
+@media (max-width: 640px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px 28px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-padding {
+    padding: 48px 20px;
+  }
 }

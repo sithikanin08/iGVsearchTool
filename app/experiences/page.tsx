@@ -327,7 +327,7 @@ export default function ExperiencesPage() {
               </button>
 
               {/* Content with generous padding */}
-              <div style={{ padding: "clamp(40px, 5vw, 56px) clamp(36px, 4.5vw, 52px)" }}>
+              <div style={{ padding: "clamp(28px, 5vw, 56px) clamp(20px, 4.5vw, 52px)" }}>
                 {/* Profile Header */}
                 <div className="flex items-center gap-5" style={{ marginBottom: "32px", paddingBottom: "32px", borderBottom: "1px solid #e2e8f0" }}>
                   <div className="shrink-0">

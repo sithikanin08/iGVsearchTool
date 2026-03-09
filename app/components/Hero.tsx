@@ -1,53 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import HeroParticleBackground from "./HeroParticleBackground";
 
-// Sri Lanka images for the 3D floating blocks - 8 cards
+// Sri Lanka images for the 3D floating blocks - 8 cards (desktop)
 const heroImages = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&h=450&fit=crop",
-    alt: "Sri Lanka Coastal Aerial",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=450&fit=crop",
-    alt: "Hill Country View",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=450&fit=crop",
-    alt: "Sri Lanka Beach Main",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=450&fit=crop",
-    alt: "Green Tea Hills",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&h=450&fit=crop",
-    alt: "Tea Plantations Large",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=450&fit=crop",
-    alt: "Traditional Dancers",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&h=450&fit=crop",
-    alt: "Nature Landscape",
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=450&fit=crop",
-    alt: "Scenic View",
-  },
+  { id: 1, src: "/GV1.jpeg", alt: "Global Volunteer Experience 1" },
+  { id: 2, src: "/GV2.jpeg", alt: "Global Volunteer Experience 2" },
+  { id: 3, src: "/GV3.jpeg", alt: "Global Volunteer Experience 3" },
+  { id: 4, src: "/GV4.jpeg", alt: "Global Volunteer Experience 4" },
+  { id: 5, src: "/GV5.jpeg", alt: "Global Volunteer Experience 5" },
+  { id: 6, src: "/GV6.jpeg", alt: "Global Volunteer Experience 6" },
+  { id: 7, src: "/GV7.jpeg", alt: "Global Volunteer Experience 7" },
+  { id: 8, src: "/GV8.jpeg", alt: "Global Volunteer Experience 8" },
+];
+
+// All 14 GV images for the mobile carousel
+const allGVImages = [
+  { id: 1, src: "/GV1.jpeg", alt: "Global Volunteer Experience 1" },
+  { id: 2, src: "/GV2.jpeg", alt: "Global Volunteer Experience 2" },
+  { id: 3, src: "/GV3.jpeg", alt: "Global Volunteer Experience 3" },
+  { id: 4, src: "/GV4.jpeg", alt: "Global Volunteer Experience 4" },
+  { id: 5, src: "/GV5.jpeg", alt: "Global Volunteer Experience 5" },
+  { id: 6, src: "/GV6.jpeg", alt: "Global Volunteer Experience 6" },
+  { id: 7, src: "/GV7.jpeg", alt: "Global Volunteer Experience 7" },
+  { id: 8, src: "/GV8.jpeg", alt: "Global Volunteer Experience 8" },
+  { id: 9, src: "/GV9.jpeg", alt: "Global Volunteer Experience 9" },
+  { id: 10, src: "/GV10.jpeg", alt: "Global Volunteer Experience 10" },
+  { id: 11, src: "/GV11.jpeg", alt: "Global Volunteer Experience 11" },
+  { id: 12, src: "/GV12.jpeg", alt: "Global Volunteer Experience 12" },
+  { id: 13, src: "/GV13.jpeg", alt: "Global Volunteer Experience 13" },
+  { id: 14, src: "/GV14.jpeg", alt: "Global Volunteer Experience 14" },
 ];
 
 // Glassmorphism card style with enhanced translucency
@@ -171,7 +157,7 @@ export default function Hero() {
   return (
     <section
       className="relative min-h-screen hero-gradient overflow-hidden"
-      style={{ paddingTop: `${navbarHeight}px` }}
+      style={{ paddingTop: `${navbarHeight}px`, paddingBottom: "40px" }}
     >
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4f8]/30 via-[#f1f3e9]/50 to-[#f1f3e9]" />
@@ -180,13 +166,13 @@ export default function Hero() {
       <HeroParticleBackground />
 
       {/* Full-width flex wrapper: centers the content block so left/right gaps are equal */}
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center">
-        {/* Content block: max-width + equal side padding; no w-full so it can center in the flex parent */}
-        <div className="relative max-w-7xl w-full px-6 sm:px-8 lg:px-10" style={{ maxWidth: 1280 }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-8 pb-6 lg:pt-10 lg:pb-4">
+      <div className="relative z-10 w-full sm:min-h-screen flex items-center justify-center">
+        {/* Content block: max-width + equal side padding */}
+        <div className="relative max-w-7xl w-full" style={{ maxWidth: 1280, paddingLeft: "clamp(20px, 6vw, 96px)", paddingRight: "clamp(20px, 6vw, 96px)" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full pt-10 pb-16 sm:pt-8 sm:pb-6 lg:pt-10 lg:pb-4 gap-y-6">
             {/* Left side - 3D Floating Image Cards */}
             <div
-              className="relative w-full h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1 mt-6 lg:mt-6 translate-y-4 lg:translate-y-6 flex items-center justify-center"
+              className="relative w-full h-[500px] sm:h-[550px] lg:h-[580px] order-2 lg:order-1 mt-6 lg:mt-6 translate-y-4 lg:translate-y-6 hidden sm:flex items-center justify-center"
               style={{
                 perspective: "1200px",
                 perspectiveOrigin: "center center",
@@ -341,45 +327,12 @@ export default function Hero() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="w-full flex flex-col items-center justify-center text-left order-1 lg:order-2 px-4 sm:px-0 gap-8 mt-2 lg:mt-4"
+              className="w-full flex flex-col items-center lg:items-start justify-center text-center lg:text-left order-1 lg:order-2 px-0 sm:px-0 gap-8 sm:gap-8 mt-4 sm:mt-0 lg:-mt-8 lg:-translate-y-4"
             >
               {/* Content wrapper — all items share the same left edge */}
-              <div className="flex flex-col gap-8 w-full max-w-xl">
-                {/* Eyebrow badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center gap-3 px-5 py-2.5 relative group cursor-default self-start"
-                >
-                  {/* Animated background with glassmorphism */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/85 to-white/90 backdrop-blur-xl rounded-full border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] group-hover:shadow-[0_6px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.95)] transition-all duration-300" />
-
-                  {/* Animated glow border */}
-                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-[#037ef3]/30 via-[#00d4ff]/30 to-[#037ef3]/30 blur-sm -z-10" />
-
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center gap-3">
-                    {/* Animated pulse dot with glow */}
-                    <div className="relative">
-                      <span className="absolute inset-0 h-2.5 w-2.5 rounded-full bg-[#037ef3] animate-ping opacity-75" />
-                      <span className="relative block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#037ef3] shadow-[0_0_8px_rgba(3,126,243,0.6)] group-hover:shadow-[0_0_12px_rgba(0,212,255,0.8)] transition-all duration-300" />
-                    </div>
-
-                    {/* Text with gradient */}
-                    <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-[#037ef3] via-[#00d4ff] to-[#037ef3] bg-clip-text text-transparent group-hover:from-[#037ef3] group-hover:via-[#00d4ff] group-hover:to-[#037ef3] transition-all duration-500">
-                      Global Volunteer{" "}
-                      <span className="mx-1.5 text-[#037ef3]/40 group-hover:text-[#037ef3]/60 transition-colors duration-300">
-                        ·
-                      </span>{" "}
-                      Sri Lanka
-                    </span>
-                  </div>
-                </motion.div>
-
+              <div className="flex flex-col gap-5 sm:gap-6 lg:gap-8 w-full max-w-xl">
                 {/* Headline */}
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-tight"
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-tight"
                   style={{ color: "#1e293b" }}>
                   Volunteer Abroad.
                   <br />
@@ -399,7 +352,7 @@ export default function Hero() {
                 </p>
 
                 {/* Primary actions */}
-                <div className="flex flex-wrap items-center justify-start gap-5 sm:gap-6">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 w-full">
                   <Link href="/projects">
                     <motion.button
                       whileHover={{ scale: 1.03 }}
@@ -432,9 +385,82 @@ export default function Hero() {
                 </div>
               </div>
             </motion.div>
+
+            {/* ── Mobile Image Carousel (visible only on small screens) ─── */}
+            <MobileCarousel />
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ── Mobile Auto-Scrolling Carousel ──────────────────── */
+function MobileCarousel() {
+  const [current, setCurrent] = useState(0);
+  const total = allGVImages.length;
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef(0);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + total) % total), [total]);
+
+  // Auto-advance every 3s
+  useEffect(() => {
+    timeoutRef.current = setTimeout(next, 3000);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [current, next]);
+
+  return (
+    <div className="sm:hidden order-3 w-full mt-10 mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="relative w-full overflow-hidden"
+        style={{ borderRadius: "16px", aspectRatio: "16/11" }}
+        onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          const diff = touchStartX.current - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); }
+        }}
+      >
+        <AnimatePresence mode="popLayout">
+          <motion.img
+            key={current}
+            src={allGVImages[current].src}
+            alt={allGVImages[current].alt}
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -60 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
+        {/* Subtle bottom gradient for dot readability */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(180deg, transparent 50%, rgba(15,23,42,0.35) 100%)" }}
+        />
+
+        {/* Dot indicators — overlaid on image */}
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+          {allGVImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className="transition-all duration-300"
+              style={{
+                width: i === current ? 20 : 6,
+                height: 6,
+                borderRadius: 3,
+                background: i === current ? "#fff" : "rgba(255,255,255,0.45)",
+              }}
+              aria-label={`Go to image ${i + 1}`}
+            />
+          ))}
+        </div>
+      </motion.div>
+    </div>
   );
 }

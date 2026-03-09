@@ -54,8 +54,8 @@ export default function Contact() {
             maxWidth: "1280px",
             marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "clamp(40px, 8vw, 96px)",
-            paddingRight: "clamp(40px, 8vw, 96px)",
+            paddingLeft: "clamp(20px, 6vw, 96px)",
+            paddingRight: "clamp(20px, 6vw, 96px)",
           }}
         >
           {/* Section Header */}
@@ -86,7 +86,7 @@ export default function Contact() {
             {/* Heading */}
             <h2
               style={{
-                fontSize: "clamp(38px, 4vw, 54px)",
+                fontSize: "clamp(28px, 4vw, 54px)",
                 fontWeight: 800,
                 lineHeight: 1.1,
                 letterSpacing: "-0.02em",
@@ -165,8 +165,8 @@ export default function Contact() {
                   {/* Contact Items */}
                   <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
                     {[
-                      { Icon: Mail, label: "Email", value: "igv@aiesec-sliit.org", href: "mailto:igv@aiesec-sliit.org" },
-                      { Icon: Phone, label: "Phone", value: "+94 11 234 5678", href: "tel:+94112345678" },
+                      { Icon: Mail, label: "Email", value: "dinidisenanayake@aiesec.net", href: "mailto:dinidisenanayake@aiesec.net" },
+                      { Icon: Phone, label: "Phone", value: "+94 76 638 8408", href: "tel:+94766388408" },
                       { Icon: MapPin, label: "Location", value: "SLIIT, New Kandy Road, Malabe, Sri Lanka", href: undefined },
                     ].map(({ Icon, label, value, href }) => (
                       <div

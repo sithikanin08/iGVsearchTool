@@ -348,8 +348,8 @@ export default function About() {
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           className="absolute pointer-events-none"
           style={{
-            width: "520px",
-            height: "520px",
+            width: "min(520px, 90vw)",
+            height: "min(520px, 90vw)",
             top: "15%",
             right: "5%",
             background: "radial-gradient(circle, #bfdbfe 0%, transparent 70%)",
@@ -369,8 +369,8 @@ export default function About() {
             maxWidth: "1280px",
             marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "clamp(40px, 8vw, 96px)",
-            paddingRight: "clamp(40px, 8vw, 96px)",
+            paddingLeft: "clamp(20px, 6vw, 96px)",
+            paddingRight: "clamp(20px, 6vw, 96px)",
           }}
         >
           {/* Heading - Spans full width, creates visual drama */}
@@ -401,7 +401,7 @@ export default function About() {
             {/* Main Heading */}
             <h2
               style={{
-                fontSize: "clamp(38px, 4vw, 54px)",
+                fontSize: "clamp(28px, 4vw, 54px)",
                 fontWeight: 800,
                 lineHeight: 1.1,
                 letterSpacing: "-0.02em",
@@ -506,84 +506,82 @@ export default function About() {
 
             </motion.div>
 
-            {/* Right Side - Floating Video Card */}
+            {/* Right Side - Floating Video Cards */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
               className="w-full flex justify-center lg:justify-end"
             >
-              <motion.div
-                whileHover={{
-                  scale: 1.02,
-                  y: -6,
-                }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="relative w-full max-w-[620px]"
-                style={{ transform: "rotate(1deg)" }}
-              >
+              <div className="relative w-full max-w-[620px] flex flex-col gap-8">
+                {/* 1st Video - Local */}
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  style={{ transform: "rotate(1deg)" }}
                 >
-                  <div
-                    className="relative aspect-video w-full overflow-hidden"
-                    style={{
-                      borderRadius: "32px",
-                      background:
-                        "linear-gradient(135deg, rgba(35, 73, 52, 0.95) 0%, rgba(58, 125, 92, 0.9) 100%)",
-                      boxShadow: "0 35px 90px rgba(0, 0, 0, 0.18)",
-                      transition: "box-shadow 0.4s ease"
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                     }}
                   >
-                    {/* Video placeholder content */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white p-8">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className="w-20 h-20 mx-auto mb-5 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300"
-                          style={{
-                            background: "rgba(255, 255, 255, 0.15)",
-                            backdropFilter: "blur(8px)",
-                            border: "1px solid rgba(255, 255, 255, 0.3)",
-                          }}
-                        >
-                          <svg
-                            className="w-9 h-9 text-white ml-1"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </motion.div>
-                        <p className="text-lg font-semibold">AIESEC in SLIIT</p>
-                        <p className="text-sm text-white/70 mt-1">Video coming soon</p>
-                      </div>
+                    <div
+                      className="relative aspect-video w-full overflow-hidden"
+                      style={{
+                        borderRadius: "24px",
+                        background: "#000",
+                        boxShadow: "0 25px 60px rgba(0, 0, 0, 0.15)",
+                        transition: "box-shadow 0.4s ease"
+                      }}
+                    >
+                      <video
+                        src="/testiVid.mp4"
+                        controls
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ border: "none" }}
+                      />
                     </div>
-
-                    {/* Decorative floating orbs */}
-                    <motion.div
-                      animate={{ x: [0, 12, 0], y: [0, -6, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-6 right-6 w-24 h-24 rounded-full bg-[#037ef3]/35 blur-2xl"
-                    />
-                    <motion.div
-                      animate={{ x: [0, -10, 0], y: [0, 10, 0] }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-white/10 blur-2xl"
-                    />
-                    <motion.div
-                      animate={{ scale: [1, 1.15, 1] }}
-                      transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-1/2 left-1/4 w-20 h-20 rounded-full bg-[#00d4ff]/20 blur-xl"
-                    />
-                  </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+
+                {/* 2nd Video - YouTube */}
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  style={{ transform: "rotate(-1deg)" }}
+                >
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1,
+                    }}
+                  >
+                    <div
+                      className="relative aspect-video w-full overflow-hidden"
+                      style={{
+                        borderRadius: "24px",
+                        background: "#000",
+                        boxShadow: "0 25px 60px rgba(0, 0, 0, 0.15)",
+                        transition: "box-shadow 0.4s ease"
+                      }}
+                    >
+                      <iframe
+                        src="https://www.youtube.com/embed/eV0iaKXfRHE?si=W-Xqg6GLGYygLS3i"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full border-0"
+                      ></iframe>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
 

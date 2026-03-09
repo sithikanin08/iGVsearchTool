@@ -6,20 +6,22 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionParticleBackground from "./SectionParticleBackground";
 
-// OP logos placeholder data - replace with actual OP logos
+// OP logos from public folder
 const opportunityProviders = [
-  { id: 1, name: "OP 1", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+1" },
-  { id: 2, name: "OP 2", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+2" },
-  { id: 3, name: "OP 3", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+3" },
-  { id: 4, name: "OP 4", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+4" },
-  { id: 5, name: "OP 5", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+5" },
-  { id: 6, name: "OP 6", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+6" },
-  { id: 7, name: "OP 7", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+7" },
-  { id: 8, name: "OP 8", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+8" },
-  { id: 9, name: "OP 9", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+9" },
-  { id: 10, name: "OP 10", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+10" },
-  { id: 11, name: "OP 11", logo: "https://via.placeholder.com/150x80/234934/ffffff?text=OP+11" },
-  { id: 12, name: "OP 12", logo: "https://via.placeholder.com/150x80/037ef3/ffffff?text=OP+12" },
+  { id: 1, name: "Senior Citizens' Elders Home", logo: "/Logo-  enior citizens elder care.jpeg" },
+  { id: 2, name: "All Ceylon YMMA Conference", logo: "/Logo - Ymma.png" },
+  { id: 3, name: "Climb Lanka", logo: "/Logo-climblanka.jpeg" },
+  { id: 4, name: "Zri Adventures (Pvt) Ltd", logo: "/Logo-ZriAd.jpeg" },
+  { id: 5, name: "Diyakawa Water Sports Centre", logo: "/Logo - Diyakawawatesport.jpeg" },
+  { id: 6, name: "Sunrise Surf School", logo: "/Logo- Sunrise.jpeg" },
+  { id: 7, name: "Ashla Nursery School", logo: "/Logo - Ashla.jpeg" },
+  { id: 8, name: "Diyakawa Hotel & Restaurant", logo: "/Logo - DiyakawaHotel&Res.jpeg" },
+  { id: 9, name: "Finnish Pre School", logo: "/Logo - Finnish.jpeg" },
+  { id: 10, name: "Rathmulukanka Nenansala Education Center", logo: "/Logo - Rathmulukanda.jpg" },
+  { id: 11, name: "Family Wellbeing Centre", logo: "/Logo - familywell.jpeg" },
+  { id: 12, name: "Induruwa Sea Turtle Conservation Project", logo: "/Logo - Induruwa.jpeg" },
+  { id: 13, name: "Lanka Mangrove Museum and Learning Center", logo: "/Logo - Lankamangrove.png" },
+  { id: 14, name: "Forest School Colombo", logo: "/Logo -ForestScl.jpg" },
 ];
 
 export default function OpportunityProviders() {
@@ -42,8 +44,8 @@ export default function OpportunityProviders() {
             maxWidth: "1280px",
             marginLeft: "auto",
             marginRight: "auto",
-            paddingLeft: "clamp(40px, 8vw, 96px)",
-            paddingRight: "clamp(40px, 8vw, 96px)",
+            paddingLeft: "clamp(20px, 6vw, 96px)",
+            paddingRight: "clamp(20px, 6vw, 96px)",
           }}
         >
           {/* Section Header */}
@@ -72,10 +74,10 @@ export default function OpportunityProviders() {
             </motion.span>
 
             {/* Heading + View All row */}
-            <div className="flex items-end justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
               <h2
                 style={{
-                  fontSize: "clamp(38px, 4vw, 54px)",
+                  fontSize: "clamp(28px, 4vw, 54px)",
                   fontWeight: 800,
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
@@ -111,7 +113,7 @@ export default function OpportunityProviders() {
                 lineHeight: 1.7,
                 color: "rgba(30, 41, 59, 0.7)",
                 marginTop: "12px",
-                whiteSpace: "nowrap",
+                whiteSpace: "normal",
               }}
             >
               Meet the organizations that make global volunteer experiences possible in Sri&nbsp;Lanka.
