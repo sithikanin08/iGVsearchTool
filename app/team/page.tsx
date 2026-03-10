@@ -43,9 +43,9 @@ const cxp = {
   coordinator: { name: "Ashen Geeth", role: "Campaign Coordinator", image: "/ashenDP.png" },
   teamLeaders: [
     { name: "Anuda Ranasinghe", role: "Team Leader", image: "/anudaDP.png" },
-    { name: "Shanil", role: "Team Leader", image: "/shanilDP.png" },
+    { name: "Shanil Fernando", role: "Team Leader", image: "/shanilDP.png" },
     { name: "Malith Samaradivakara", role: "Team Leader", image: "/malithDp.png" },
-    { name: "Ashan", role: "Team Leader", image: "/ashanDP.png" },
+    { name: "Ashan Induranga", role: "Team Leader", image: "/ashanDP.png" },
   ],
 };
 

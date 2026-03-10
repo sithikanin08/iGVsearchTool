@@ -21,6 +21,7 @@ export interface Project {
   location: string;
   status: "active" | "inactive";
   fee: string;
+  feeAlt?: string;
   amenities: string[];
   expaLink: string;
   opsMapping: ProjectOPMapping[];
@@ -54,7 +55,8 @@ export const opportunityProviders: OP[] = [
   { id: 15, name: "Forest School Colombo", photo: "/Logo -ForestScl.jpg", organization: "Environmental Education", location: "Colombo, Sri Lanka", description: "Teaching children and youth about nature and environmental conservation.", website: "#" },
   { id: 16, name: "Diyakawa Water Sports Centre – Hospitality", photo: "/Logo - DiyakawaBen.jpeg", organization: "Water Sports & Hospitality", location: "Sri Lanka", description: "Hospitality training at a water sports and recreation centre.", website: "#" },
   { id: 17, name: "Diyakawa Water Sports Centre – Events & Marketing", photo: "/Logo - DiyakawaAru.jpeg", organization: "Water Sports & Events", location: "Sri Lanka", description: "Events management and marketing at a water sports centre.", website: "#" },
-  { id: 18, name: "Diyakawa Hotel & Restaurant", photo: "/Logo - DiyakawaHotel&Res.jpeg", organization: "Hotel & Restaurant", location: "Sri Lanka", description: "Hospitality and restaurant management experience.", website: "#" }
+  { id: 18, name: "Diyakawa Hotel & Restaurant", photo: "/Logo - DiyakawaHotel&Res.jpeg", organization: "Hotel & Restaurant", location: "Sri Lanka", description: "Hospitality and restaurant management experience.", website: "#" },
+  { id: 19, name: "La Luna Water Sports Centre", photo: "/Laluna.png", organization: "Water Sports", location: "Sri Lanka", description: "Promoting water sports and coastal tourism experiences.", website: "#" }
 ];
 
 export const allProjects: Project[] = [
@@ -70,6 +72,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Transportation", "Accommodation", "Three Meals"],
     expaLink: "https://aiesec.org/opportunity/global-volunteer/1316713",
     opsMapping: [
@@ -77,8 +80,8 @@ export const allProjects: Project[] = [
         opName: "Senior Citizens' Elders Home",
         logistics: "Transportation + Accommodation + 3 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329901", jdBooklet: "https://drive.google.com/file/d/10ZXfL09oz1ZjyaouLWR9ponyDy-A-GFF/view?usp=drive_link" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329357", jdBooklet: "https://drive.google.com/file/d/1Wh4DvYfbeEnUyfLyT4Jj-nDPBttvXUYQ/view?usp=drive_link" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329901", jdBooklet: "https://drive.google.com/file/d/16zz9uxpcPbxaDhaCWsElOm8tblPiz7bj/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329357", jdBooklet: "https://drive.google.com/file/d/1R1pYAQFgya6btAggyjrH2DLDFbFgbDcA/view?usp=sharing" }
         ]
       },
       {
@@ -110,6 +113,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Accommodation"],
     expaLink: "https://aiesec.org/opportunity/global-volunteer/1316643",
     opsMapping: [
@@ -117,8 +121,8 @@ export const allProjects: Project[] = [
         opName: "Climb Lanka",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329539" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329361", jdBooklet: "https://drive.google.com/file/d/1kxqRVMIan54Z8PIL1uEB2r4ZargyEAWt/view?usp=drive_link" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329539", jdBooklet: "https://drive.google.com/file/d/1Bfenu40obrqxy9t_DnYc-DbEkPTpzWX4/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329361", jdBooklet: "https://drive.google.com/file/d/1cdpXW3CxQbgbR5GdIz-Sh7CmdeXx_fZt/view?usp=sharing" }
         ]
       },
       {
@@ -126,15 +130,15 @@ export const allProjects: Project[] = [
         logistics: "Accommodation",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331354", jdBooklet: "https://drive.google.com/file/d/1MT78xIBVTY1ZGemwuv_y8rC8cG2rMvHN/view?usp=drive_link" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329360", jdBooklet: "https://drive.google.com/file/d/1Bq3za2-xTUo5LEtoVANW_YYWyRm-fOaj/view?usp=drive_link" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329360", jdBooklet: "https://drive.google.com/file/d/1aMHCZHhNUDhch2750KzoSa8HrdQk1bDX/view?usp=sharing" }
         ]
       },
       {
         opName: "All Ceylon YMMA Conference",
         logistics: "Accommodation + 2 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331849" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331838" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331849", jdBooklet: "https://drive.google.com/file/d/1U9dhF1oVSyT-vIzLKGk5Qwl1tXrMmNkR/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331838", jdBooklet: "https://drive.google.com/file/d/1jfvPha7TClLkHbdhCUnLpIST408LsW3y/view?usp=sharing" }
         ]
       },
       {
@@ -142,7 +146,7 @@ export const allProjects: Project[] = [
         logistics: "Accommodation + 3 Meals",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332690" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332693" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332688", jdBooklet: "https://drive.google.com/file/d/1HzFpEcCwTC1qRymCUxIE3_OXrcGryv8o/view?usp=sharing" }
         ]
       },
       {
@@ -150,14 +154,15 @@ export const allProjects: Project[] = [
         logistics: "Accommodation + 3 Meals",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332694" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332693" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332693", jdBooklet: "https://drive.google.com/file/d/1FpxMtC4nJUjgBw9QJ9OPaMxFcmZ6tJGL/view?usp=sharing" }
         ]
       },
       {
         opName: "Diyakawa Hotel & Restaurant",
         logistics: "Accommodation + 3 Meals",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332886" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332886" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332885", jdBooklet: "https://drive.google.com/file/d/1vUfICSq6_nSuYhpSaapzVi2jQpimbHBm/view?usp=sharing" }
         ]
       },
       {
@@ -165,7 +170,7 @@ export const allProjects: Project[] = [
         logistics: "Accommodation + 2 Meals",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332720" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332718" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332718", jdBooklet: "https://drive.google.com/file/d/1rW-2EgySQeNtRq_MJsW-XTSHHOQn9405/view?usp=sharing" }
         ]
       }
     ]
@@ -181,6 +186,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Transportation", "Accommodation", "Two Meals"],
     expaLink: "https://aiesec.org/opportunity/global-volunteer/1316644",
     opsMapping: [
@@ -188,24 +194,24 @@ export const allProjects: Project[] = [
         opName: "Finnish Pre School",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330064", jdBooklet: "https://drive.google.com/file/d/1gS3HwIFwRbkR1Pgcmv3WgwjcU0GWGRVE/view?usp=drive_link" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329363" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330064", jdBooklet: "https://drive.google.com/file/d/1P_RN86eQvQW243xlBMl07Dy4NpGE7rFS/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329363", jdBooklet: "https://drive.google.com/file/d/1ggYQ9vrqoIyV6MdZW-C5ZizzCFPGu0vM/view?usp=sharing" }
         ]
       },
       {
         opName: "Rathmulukanka Nenansala Education Center",
         logistics: "Accommodation + 2 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330062", jdBooklet: "https://drive.google.com/file/d/1QuJv5DqCDGmdUGhi5M4ZLaaCT44A-O0t/view?usp=drive_link" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1323132" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330062" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1323132", jdBooklet: "https://drive.google.com/file/d/1yfcM7XV8NLi_Exw-RAlJXCu1I1AM99y_/view?usp=sharing" }
         ]
       },
       {
         opName: "Family Wellbeing Centre",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332342" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332340" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332342", jdBooklet: "https://drive.google.com/file/d/1ObRyeDg4Ve-o5ZmGsOxOh3oo5eh3d0ET/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332340", jdBooklet: "https://drive.google.com/file/d/1UwwnTNULSz56piwKl5frobmd8DNXN-TK/view?usp=sharing" }
         ]
       },
       {
@@ -213,7 +219,7 @@ export const allProjects: Project[] = [
         logistics: "Accommodation + 2 Meals",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332329" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332327" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332327", jdBooklet: "https://drive.google.com/file/d/1RhGo4J3peYuqpkUWrlDiIKYDeJAvWTlo/view?usp=sharing" }
         ]
       }
     ]
@@ -229,6 +235,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
@@ -253,6 +260,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Accommodation"],
     expaLink: "https://aiesec.org/opportunity/global-volunteer/1309136",
     opsMapping: [
@@ -261,14 +269,14 @@ export const allProjects: Project[] = [
         logistics: "Accommodation + Transportation",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331039", jdBooklet: "https://drive.google.com/file/d/1UASk9aBRGIt4QI2JNuSoWFiyCgh6dDg1/view?usp=drive_link" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1309136" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1309136", jdBooklet: "https://drive.google.com/file/d/1kXdidr9CpyxgSSlzdnIdLoQL9XqudpbV/view?usp=sharing" }
         ]
       },
       {
         opName: "Diyakawa Water Sports Centre",
-        logistics: "Accommodation + Transportation",
+        logistics: "Accommodation + 3 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329932" },
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329932", jdBooklet: "https://drive.google.com/file/d/1Qop97SjbkzCBQaVS_H9BHdmfBOwWCU7Q/view?usp=sharing" },
           { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329942", jdBooklet: "https://drive.google.com/open?id=1_psdoMz3UuioLFFjKCCYg0CtF_LjrfgS&usp=drive_copy" }
         ]
       }
@@ -285,23 +293,24 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$150",
     amenities: ["Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
       {
         opName: "Diyakawa Water Sports Centre",
-        logistics: "Accommodation + Transportation",
+        logistics: "Accommodation + 3 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330014" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329941", jdBooklet: "https://drive.google.com/file/d/1eJ1-mlh6evclybEwJTYB-xiohCEN_yzi/view?usp=drive_link" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330014", jdBooklet: "https://drive.google.com/file/d/1vFdjtFg_mLsPCEj2QtKBP0CHfjTTjWYp/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329941", jdBooklet: "https://drive.google.com/file/d/13ZFU_0UdLEwypehbtX_nLkga5pXEJKf_/view?usp=sharing" }
         ]
       },
       {
-        opName: "Forest School Colombo",
-        logistics: "Accommodation",
+        opName: "La Luna Water Sports Centre",
+        logistics: "Accommodation + 3 Meals",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332583" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332412" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332884" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332882", jdBooklet: "https://drive.google.com/file/d/1474p9qMjE5_ic7_H_OJvERb-yEkZ_fU5/view?usp=sharing" }
         ]
       }
     ]
@@ -317,6 +326,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Accommodation", "Three Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
@@ -324,15 +334,15 @@ export const allProjects: Project[] = [
         opName: "Lanka Mangrove Museum and Learning Center",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331930" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331930", jdBooklet: "https://drive.google.com/file/d/1n7Ge-VIEOHdM0pudTE8QCwECKwiKcD-W/view?usp=sharing" }
         ]
       },
       {
         opName: "Forest School Colombo",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332583" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332412" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332583", jdBooklet: "https://drive.google.com/file/d/1NPDV_mEF5iWepnKgHsb5pixRTx6sYqTZ/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332412", jdBooklet: "https://drive.google.com/file/d/1YPxkXwqi5sB8hcHaqj2cWWQ8N_QklZz8/view?usp=sharing" }
         ]
       }
     ]
@@ -348,6 +358,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
@@ -355,7 +366,7 @@ export const allProjects: Project[] = [
         opName: "Lanka Mangrove Museum and Learning Center",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332134" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332134", jdBooklet: "https://drive.google.com/file/d/18nL6UVjOLJ6-ugWZKj4bbTlQaHJ61kTV/view?usp=sharing" }
         ]
       }
     ]
@@ -371,6 +382,7 @@ export const allProjects: Project[] = [
     location: "Various locations, Sri Lanka",
     status: "active",
     fee: "$120",
+    feeAlt: "$90",
     amenities: ["Transportation", "Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
@@ -378,14 +390,15 @@ export const allProjects: Project[] = [
         opName: "Lanka Mangrove Museum and Learning Center",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332135" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332135", jdBooklet: "https://drive.google.com/file/d/1riilkgfFGE5t4rhcDjvY_VH-ZqJgkb3V/view?usp=sharing" }
         ]
       },
       {
         opName: "Forest School Colombo",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332581" }
+          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332582", jdBooklet: "https://drive.google.com/file/d/1cD-Lcbiepu8igp8riRaDRnma3xSssPN0/view?usp=sharing" },
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332581", jdBooklet: "https://drive.google.com/file/d/1kh1xxM4HXHgEwh5hX67MRmm0U0wvRhCx/view?usp=sharing" }
         ]
       }
     ]

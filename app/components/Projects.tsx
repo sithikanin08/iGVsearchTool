@@ -543,7 +543,7 @@ export default function Projects() {
                       }}
                     >
                       <span style={{ color: "white", fontWeight: 800, fontSize: "15px" }}>
-                        $90
+                        {selectedProject.feeAlt || "$90"}
                       </span>
                     </div>
                   </div>

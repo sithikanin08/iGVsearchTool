@@ -319,7 +319,7 @@ export default function ProjectsPage() {
                         }}
                       >
                         <span style={{ color: "white", fontWeight: 800, fontSize: "15px" }}>
-                          $90
+                          {project.feeAlt || "$90"}
                         </span>
                       </div>
                     </div>
@@ -635,7 +635,7 @@ export default function ProjectsPage() {
                       }}
                     >
                       <span style={{ color: "white", fontWeight: 800, fontSize: "15px" }}>
-                        $90
+                        {selectedProject.feeAlt || "$90"}
                       </span>
                     </div>
                   </div>
@@ -889,16 +889,15 @@ export default function ProjectsPage() {
                   className="absolute z-10 flex flex-col items-start justify-end"
                   style={{
                     inset: 0,
-                    padding: "clamp(28px, 5vw, 48px) clamp(28px, 4.5vw, 44px)",
-                    paddingTop: "clamp(48px, 8vw, 72px)",
+                    padding: "clamp(20px, 4vw, 48px) clamp(20px, 4vw, 44px)",
+                    paddingTop: "clamp(36px, 6vw, 72px)",
                   }}
                 >
                   {/* Logo Badge */}
                   <div
+                    className="w-[56px] h-[56px] sm:w-[80px] sm:h-[80px]"
                     style={{
-                      width: "80px",
-                      height: "80px",
-                      borderRadius: "18px",
+                      borderRadius: "14px",
                       background: "#ffffff",
                       display: "flex",
                       alignItems: "center",
@@ -906,10 +905,10 @@ export default function ProjectsPage() {
                       boxShadow: "0 8px 28px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.12)",
                       border: "3px solid rgba(255,255,255,0.35)",
                       flexShrink: 0,
-                      marginBottom: "16px",
+                      marginBottom: "12px",
                     }}
                   >
-                    <span style={{ color: "#1e293b", fontWeight: 900, fontSize: "36px", lineHeight: 1 }}>
+                    <span className="text-[24px] sm:text-[36px]" style={{ color: "#1e293b", fontWeight: 900, lineHeight: 1 }}>
                       {selectedOP.name.charAt(0)}
                     </span>
                   </div>
@@ -917,7 +916,7 @@ export default function ProjectsPage() {
                   {/* OP Title */}
                   <h3
                     style={{
-                      fontSize: "clamp(26px, 3vw, 34px)",
+                      fontSize: "clamp(20px, 3vw, 34px)",
                       fontWeight: 800,
                       color: "white",
                       letterSpacing: "-0.03em",
@@ -943,20 +942,20 @@ export default function ProjectsPage() {
                   <X size={18} className="text-slate-600 transition-transform group-hover:rotate-90" />
                 </button>
 
-                <div className="flex flex-col flex-grow" style={{ padding: "clamp(32px, 4vw, 48px) clamp(28px, 3.5vw, 44px)" }}>
+                <div className="flex flex-col flex-grow" style={{ padding: "clamp(24px, 4vw, 48px) clamp(20px, 3.5vw, 44px)" }}>
 
                   {/* Verified Partner Top Ribbon */}
-                  <div className="flex items-center gap-2 mb-4" style={{ color: "#037ef3", fontSize: "12px", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                    <ShieldCheck size={16} /> Verified Partner
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4" style={{ color: "#037ef3", fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                    <ShieldCheck size={14} /> Verified Partner
                   </div>
 
-                  <h2 style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 900, color: "#0f172a", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "12px" }}>
+                  <h2 style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, color: "#0f172a", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "10px" }}>
                     {selectedOP.name}
                   </h2>
 
-                  <div className="flex flex-wrap items-center gap-6" style={{ color: "#64748b", fontWeight: 500, fontSize: "16px", marginBottom: "32px" }}>
-                    <div className="flex items-center gap-2"><MapPin size={18} style={{ color: "#037ef3" }} /> {selectedOP.location}</div>
-                    <div className="flex items-center gap-2"><Building2 size={18} style={{ color: "#94a3b8" }} /> {selectedOP.organization}</div>
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-6" style={{ color: "#64748b", fontWeight: 500, fontSize: "14px", marginBottom: "24px" }}>
+                    <div className="flex items-center gap-1.5 sm:gap-2"><MapPin size={16} style={{ color: "#037ef3" }} /> {selectedOP.location}</div>
+                    <div className="flex items-center gap-1.5 sm:gap-2"><Building2 size={16} style={{ color: "#94a3b8" }} /> {selectedOP.organization}</div>
                   </div>
 
                   {/* About Section */}
