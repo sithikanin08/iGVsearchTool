@@ -104,7 +104,7 @@ export const allProjects: Project[] = [
   },
   {
     id: 2,
-    name: "Skill-up!",
+    name: "Skill-up",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop",
     brief: "Skills training project impacting SDG #8 by providing young people with soft and hard skills for career growth.",
     fullDescription: "The project aims to impact SDG #8 by providing young people with soft and hard skills training, needed to qualify for a decent job, and career guidance. Volunteers lead workshops on communication, digital literacy, entrepreneurship, and professional development to help Sri Lankan youth build competitive skill sets.",
@@ -526,10 +526,10 @@ export const allProjects: Project[] = [
   },
   {
     id: 18,
-    name: "Scale Up!",
+    name: "Scale Up",
     image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop",
     brief: "Entrepreneurship and business skills project helping aspiring entrepreneurs launch and grow their ventures.",
-    fullDescription: "Scale Up! equipped aspiring entrepreneurs with essential business skills through startup workshops, mentorship programs, and pitch competitions. Volunteers with business expertise guided participants through ideation, business planning, and execution to help turn ideas into viable ventures.",
+    fullDescription: "Scale Up equipped aspiring entrepreneurs with essential business skills through startup workshops, mentorship programs, and pitch competitions. Volunteers with business expertise guided participants through ideation, business planning, and execution to help turn ideas into viable ventures.",
     sdg: ["8 - Decent Work and Economic Growth", "9 - Industry, Innovation and Infrastructure"],
     duration: "4/6 Weeks",
     location: "Colombo, Sri Lanka",

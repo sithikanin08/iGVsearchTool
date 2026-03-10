@@ -103,7 +103,7 @@ export default function Navbar() {
               className="md:hidden overflow-hidden mt-2"
             >
               <div
-                className="backdrop-blur-2xl border border-white/50 rounded-2xl py-4 px-4"
+                className="backdrop-blur-2xl border border-white/50 rounded-2xl py-5 px-5"
                 style={{
                   background: "rgba(255,255,255,0.35)",
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
@@ -111,16 +111,18 @@ export default function Navbar() {
                   boxShadow: "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
                 }}
               >
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-5 py-4 text-[#1e293b] font-medium text-[15px] text-center rounded-xl hover:bg-white/50 transition-colors duration-150"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <div className="flex flex-col gap-2">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block py-3.5 text-[#1e293b] font-semibold text-[15px] text-center rounded-xl hover:bg-white/50 transition-colors duration-150"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}
