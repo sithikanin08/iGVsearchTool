@@ -103,21 +103,23 @@ export default function Navbar() {
               className="md:hidden overflow-hidden mt-2"
             >
               <div
-                className="backdrop-blur-2xl border border-white/50 rounded-2xl py-5 px-5"
+                className="backdrop-blur-2xl border border-[#e0e7ef] rounded-2xl py-6 px-6 shadow-lg"
                 style={{
-                  background: "rgba(255,255,255,0.35)",
+                  background: "rgba(255,255,255,0.45)",
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   backdropFilter: "blur(24px) saturate(180%)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
+                  boxShadow: "0 12px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)",
+                  border: "1.5px solid #e0e7ef"
                 }}
               >
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-4">
                   {navItems.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block py-3.5 text-[#1e293b] font-semibold text-[15px] text-center rounded-xl hover:bg-white/50 transition-colors duration-150"
+                      className="block py-4 text-[#1e293b] font-bold text-[17px] text-center rounded-xl hover:bg-[#f0f6ff] transition-all duration-200"
+                      style={{letterSpacing: '0.02em'}}
                     >
                       {item.name}
                     </Link>

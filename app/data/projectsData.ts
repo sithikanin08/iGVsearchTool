@@ -334,7 +334,7 @@ export const allProjects: Project[] = [
         opName: "Lanka Mangrove Museum and Learning Center",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331930", jdBooklet: "https://drive.google.com/file/d/1n7Ge-VIEOHdM0pudTE8QCwECKwiKcD-W/view?usp=sharing" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331930", jdBooklet: "https://drive.google.com/file/d/11s0avLhD4dHHH6nb8qUK8t1bLCKktBVN/view?usp=sharing" }
         ]
       },
       {
@@ -390,7 +390,7 @@ export const allProjects: Project[] = [
         opName: "Lanka Mangrove Museum and Learning Center",
         logistics: "Accommodation",
         opportunities: [
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332135", jdBooklet: "https://drive.google.com/file/d/1riilkgfFGE5t4rhcDjvY_VH-ZqJgkb3V/view?usp=sharing" }
+          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332135", jdBooklet: "https://drive.google.com/file/d/1jLkN66WpLWHae4Eek4Z5EQM1oKAee9s3/view?usp=sharing" }
         ]
       },
       {
