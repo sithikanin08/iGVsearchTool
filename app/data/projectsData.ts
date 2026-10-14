@@ -45,17 +45,14 @@ export const opportunityProviders: OP[] = [
   { id: 5, name: "Zri Adventures (Pvt) Ltd", photo: "/Logo-ZriAd.jpeg", organization: "Adventure Sports", location: "Sri Lanka", description: "Promoting physical activity and outdoor adventure sports.", website: "#" },
   { id: 6, name: "All Ceylon YMMA Conference", photo: "/Logo - Ymma.png", organization: "Skills Development", location: "Sri Lanka", description: "Providing skills training and development.", website: "#" },
   { id: 7, name: "Diyakawa Water Sports Centre", photo: "/Logo - Diyakawawatesport.jpeg", organization: "Water Sports", location: "Sri Lanka", description: "Promoting physical activity and outdoor water sports.", website: "#" },
-  { id: 8, name: "Sunrise Surf School", photo: "/Logo- Sunrise.jpeg", organization: "Surf School", location: "Sri Lanka", description: "Promoting physical activity and surfing skills.", website: "#" },
   { id: 9, name: "Finnish Pre School", photo: "/Logo - Finnish.jpeg", organization: "Education Center", location: "Sri Lanka", description: "Providing quality education for young children.", website: "#" },
   { id: 10, name: "Rathmulukanka Nenansala Education Center", photo: "/Logo - Rathmulukanda.jpg", organization: "Education Center", location: "Sri Lanka", description: "Providing quality education and digital access.", website: "#" },
-  { id: 11, name: "Family Wellbeing Centre", photo: "/Logo - familywell.jpeg", organization: "Wellbeing Center", location: "Sri Lanka", description: "Promoting psychological and physical wellbeing for families.", website: "#" },
   { id: 12, name: "Ashla Nursery School", photo: "/Logo - Ashla.jpeg", organization: "Nursery School", location: "Sri Lanka", description: "Providing quality early education for children.", website: "#" },
   { id: 13, name: "Induruwa Sea Turtle Conservation Project", photo: "/Logo - Induruwa.jpeg", organization: "Marine Conservation", location: "Sri Lanka", description: "Protecting endangered sea turtles and their habitats.", website: "#" },
   { id: 14, name: "Lanka Mangrove Museum and Learning Center", photo: "/Logo - Lankamangrove.png", organization: "Environmental Conservation", location: "Sri Lanka", description: "Preserving and educating about Sri Lanka's vital mangrove ecosystems.", website: "#" },
   { id: 15, name: "Forest School Colombo", photo: "/Logo -ForestScl.jpg", organization: "Environmental Education", location: "Colombo, Sri Lanka", description: "Teaching children and youth about nature and environmental conservation.", website: "#" },
   { id: 16, name: "Diyakawa Water Sports Centre – Hospitality", photo: "/Logo - DiyakawaBen.jpeg", organization: "Water Sports & Hospitality", location: "Sri Lanka", description: "Hospitality training at a water sports and recreation centre.", website: "#" },
   { id: 17, name: "Diyakawa Water Sports Centre – Events & Marketing", photo: "/Logo - DiyakawaAru.jpeg", organization: "Water Sports & Events", location: "Sri Lanka", description: "Events management and marketing at a water sports centre.", website: "#" },
-  { id: 18, name: "Diyakawa Hotel & Restaurant", photo: "/Logo - DiyakawaHotel&Res.jpeg", organization: "Hotel & Restaurant", location: "Sri Lanka", description: "Hospitality and restaurant management experience.", website: "#" },
   { id: 19, name: "La Luna Water Sports Centre", photo: "/Laluna.png", organization: "Water Sports", location: "Sri Lanka", description: "Promoting water sports and coastal tourism experiences.", website: "#" }
 ];
 
@@ -156,22 +153,6 @@ export const allProjects: Project[] = [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332694" },
           { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332693", jdBooklet: "https://drive.google.com/file/d/1FpxMtC4nJUjgBw9QJ9OPaMxFcmZ6tJGL/view?usp=sharing" }
         ]
-      },
-      {
-        opName: "Diyakawa Hotel & Restaurant",
-        logistics: "Accommodation + 3 Meals",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332886" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332885", jdBooklet: "https://drive.google.com/file/d/1vUfICSq6_nSuYhpSaapzVi2jQpimbHBm/view?usp=sharing" }
-        ]
-      },
-      {
-        opName: "Sunrise Surf School",
-        logistics: "Accommodation + 2 Meals",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332720" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332718", jdBooklet: "https://drive.google.com/file/d/1rW-2EgySQeNtRq_MJsW-XTSHHOQn9405/view?usp=sharing" }
-        ]
       }
     ]
   },
@@ -207,16 +188,8 @@ export const allProjects: Project[] = [
         ]
       },
       {
-        opName: "Family Wellbeing Centre",
-        logistics: "Accommodation",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332342", jdBooklet: "https://drive.google.com/file/d/1ObRyeDg4Ve-o5ZmGsOxOh3oo5eh3d0ET/view?usp=sharing" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332340", jdBooklet: "https://drive.google.com/file/d/1UwwnTNULSz56piwKl5frobmd8DNXN-TK/view?usp=sharing" }
-        ]
-      },
-      {
         opName: "Ashla Nursery School",
-        logistics: "Accommodation + 2 Meals",
+        logistics: "Accommodation + 1 Meal",
         opportunities: [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332329" },
           { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1332327", jdBooklet: "https://drive.google.com/file/d/1RhGo4J3peYuqpkUWrlDiIKYDeJAvWTlo/view?usp=sharing" }
@@ -238,16 +211,7 @@ export const allProjects: Project[] = [
     feeAlt: "$90",
     amenities: ["Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
-    opsMapping: [
-      {
-        opName: "Rathmulukanka Nenansala Education Center",
-        logistics: "Accommodation + 2 Meals",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330063" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1322941" }
-        ]
-      }
-    ]
+    opsMapping: []
   },
   {
     id: 5,
@@ -271,14 +235,6 @@ export const allProjects: Project[] = [
           { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1331039", jdBooklet: "https://drive.google.com/file/d/1UASk9aBRGIt4QI2JNuSoWFiyCgh6dDg1/view?usp=drive_link" },
           { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1309136", jdBooklet: "https://drive.google.com/file/d/1kXdidr9CpyxgSSlzdnIdLoQL9XqudpbV/view?usp=sharing" }
         ]
-      },
-      {
-        opName: "Diyakawa Water Sports Centre",
-        logistics: "Accommodation + 3 Meals",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329932", jdBooklet: "https://drive.google.com/file/d/1Qop97SjbkzCBQaVS_H9BHdmfBOwWCU7Q/view?usp=sharing" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329942", jdBooklet: "https://drive.google.com/open?id=1_psdoMz3UuioLFFjKCCYg0CtF_LjrfgS&usp=drive_copy" }
-        ]
       }
     ]
   },
@@ -297,14 +253,6 @@ export const allProjects: Project[] = [
     amenities: ["Accommodation", "Two Meals"],
     expaLink: "https://expa.aiesec.org",
     opsMapping: [
-      {
-        opName: "Diyakawa Water Sports Centre",
-        logistics: "Accommodation + 3 Meals",
-        opportunities: [
-          { duration: "4 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1330014", jdBooklet: "https://drive.google.com/file/d/1vFdjtFg_mLsPCEj2QtKBP0CHfjTTjWYp/view?usp=sharing" },
-          { duration: "6 Weeks", applyLink: "https://aiesec.org/opportunity/global-volunteer/1329941", jdBooklet: "https://drive.google.com/file/d/13ZFU_0UdLEwypehbtX_nLkga5pXEJKf_/view?usp=sharing" }
-        ]
-      },
       {
         opName: "La Luna Water Sports Centre",
         logistics: "Accommodation + 3 Meals",

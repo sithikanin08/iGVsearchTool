@@ -26,13 +26,12 @@ const avatar = (name: string) =>
 /* ── B2B ── */
 const b2b = {
   lcvp: { name: "Sabeelur Rashaad", role: "LCVP B2B", image: "/rashaadDP.png", email: "srashaad@aiesec.net", linkedin: "https://www.linkedin.com/in/sabeelurrashaad/", phone: "+94 77 422 6876" },
-  level2: [
-    { name: "Risni De Mel", role: "Specialist", image: "/risinidemelDP.png" },
-    { name: "Sithika Ninduwara", role: "Team Leader", image: "/sithikaDP.png" },
+  manager: { name: "Sithika Ninduwara", role: "B2B Manager", image: "/sithikaDP.png" },
+  teamLeaders: [
     { name: "Suprajan Jeyapal", role: "Team Leader", image: "/suprajan.png" },
-    { name: "Dahamya Kulnadi", role: "Team Leader", image: "/dahamyaDP.png" },
     { name: "Rageeshan Chandrasegaran", role: "Team Leader", image: "/rageeshanDP.png" },
-    { name: "Harshitha Yasiru", role: "Team Leader", image: "/yasiruDP.png" },
+    { name: "Devmi Sadewna", role: "B2B Team Leader", image: "/devmiDP.jpg" },
+    { name: "Kaveesha Gunarathene", role: "B2B Team Leader", image: "/kaveeshaDP.jpg" },
   ],
 };
 
@@ -53,21 +52,22 @@ const cxp = {
 const irm = {
   lcvp: { name: "Dinidi Senanayake", role: "LCVP IR & Matching", image: "/dinidiDP%20(1).png", email: "dinidisenanayake@aiesec.net", linkedin: "http://www.linkedin.com/in/dinidi-senanayake", phone: "+94 76 638 8408" },
   ir: {
-    manager: { name: "Kavini Wijesiriwardena", role: "IR Manager", image: "/kaviniDP.png" },
-    coordinator: { name: "Yohan Wickramasinghe", role: "Campaign Coordinator", image: "/YohanDP.png" },
+    manager: { name: "Nawoda Weerasiri", role: "IR Manager", image: "/nawodaDP.jpg" },
+    coordinator: { name: "Risni De Mel", role: "Campaign Coordinator", image: "/risniDP.jpg" },
     leaders: [
-      { name: "Vindhi Akmeemana", role: "Team Leader", image: "/vindhiDP.png" },
-      { name: "Nawoda Weerasiri", role: "Team Leader", image: "/nawodaDP.png" },
-      { name: "Binadi Hettiarachchi", role: "Team Leader", image: "/Binadi.png" },
+      { name: "Vindhi Akmeemana", role: "Senior IR Team Leader", image: "/vindhiDP.jpg" },
+      { name: "Inothma Hansinie", role: "IR Team Leader", image: "/inothmaDP.jpg" },
+      { name: "Nethulli Gunathilake", role: "IR Team Leader", image: "/nethulliDP.png" },
     ],
   },
   matching: {
-    manager: { name: "Monali Edirisinghe", role: "Matching Manager", image: "/monaliDP.png" },
-    coordinator: { name: "Hashini vijerathne", role: "Matching Coordinator", image: "/hashiniDP.png" },
+    manager: { name: "Mahdy Hassan", role: "Matching Manager", image: "/mahdyDP.png" },
+    coordinator: { name: "Monali Edirisinghe", role: "Matching Specialist", image: "/monaliDP.jpg" },
     leaders: [
-      { name: "Birtney Godwin", role: "Team Leader", image: "/britDP.png" },
-      { name: "Mahady Hassan", role: "Team Leader", image: "/mahadyDP.png" },
-      { name: "Methmi Liyanage", role: "Team Leader", image: "/methmiDP.png" },
+      { name: "Britney Godwin", role: "Senior Matching Team Leader", image: "/britneyDP.png" },
+      { name: "Chetha Athapattu", role: "Matching Team Leader", image: "/chethaDP.jpg" },
+      { name: "Piumra Prathibhan", role: "Matching Team Leader", image: "/piumraDP.jpg" },
+      { name: "Yehan De Silva", role: "Matching Team Leader", image: "/yehanDP.jpg" },
     ],
   },
 };
@@ -567,12 +567,21 @@ export default function TeamPage() {
 
             {/* Connector */}
             <VerticalConnector />
+
+            {/* Manager */}
+            <CardRow>
+              <PersonCard member={b2b.manager} />
+            </CardRow>
+
+            {/* Connector from Manager to TLs */}
+            <VerticalConnector />
             <HorizontalBracket />
             <div style={{ height: "8px" }} />
 
+            {/* Team Leaders under Manager */}
             <CardRow>
-              {b2b.level2.map((m) => (
-                <PersonCard key={m.name} member={m} />
+              {b2b.teamLeaders.map((tl) => (
+                <PersonCard key={tl.name} member={tl} />
               ))}
             </CardRow>
           </DepartmentSection>
